@@ -3,7 +3,7 @@
     <div class="nav">
       <div class="nav-wrap">
         <div class="wrap-left">
-          <router-link to="/" class="left-c">
+          <router-link to="/about" class="left-c">
             <span>Xiao🐉</span>&nbsp;&nbsp;
             <span>首页</span>
           </router-link>
