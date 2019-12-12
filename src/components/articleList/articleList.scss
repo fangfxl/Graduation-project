@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.article {
+    width: 60vw;
+    margin: auto;
+    margin-top: 200px;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", SimHei, STHeiti;
+}
+
+.left {
+    a {
+        img {
+            width: 190px;
+            height: 200px;
+        }
+    }
+}
+
+.right {
+
+    .top {
+        height: 180px;
+    }
+
+    a {
+        font-size: 24px;
+        color: #434343;
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.2em;
+        text-decoration: none;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.5em;
+        opacity: 0.4;
+        overflow: hidden; //隐藏超出
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; //第几行开始用省略号
+        text-overflow: ellipsis; //省略号
+    }
+
+    .bottom {
+        color: #b9b5b5;
+        line-height: 20px;
+
+        .author {
+            padding-right: 40px;
+        }
+    }
+}
+
+.el-row {
+    border-bottom: 1px solid gray;
+    padding: 25px 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+}
+
+.el-row:hover {
+    box-shadow: 4px 10px 10px rgb(179, 177, 177);
+    transform: translateY(-5px);
+}

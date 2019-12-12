@@ -1,124 +1,144 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  .home {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    padding-top: 13vh;
-    //  border: 1px solid red;
-    background-color: #333333;
-  }
-  .row {
-    margin-top: 5vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    .row-item {
+  margin: 0;
+  padding: 0;
+}
+
+.home {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  padding-top: 13vh;
+  //  border: 1px solid red;
+  background-color: #333333;
+}
+
+.row {
+  margin-top: 5vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .row-item {
+    width: 25vw;
+
+    .item {
       width: 25vw;
-      .item {
-        width: 25vw;
-        background-color: rgb(255, 255, 255);
-        margin: 5vh auto;
-      }
-      .icon {
-        display: none;
-        position: absolute;
-        text-align: center;
-        top: 40%;
-        left: 40%;
-      }
-  
-      .el-icon-position {
-        font-size: 4rem;
-        color: rgb(255, 255, 255);
-        transition: all 5s ease-in-out;
-      }
-  
-      .item-img {
-        position: relative;
+      background-color: rgb(255, 255, 255);
+      margin: 5vh auto;
+    }
+
+    .icon {
+      display: none;
+      position: absolute;
+      text-align: center;
+      top: 40%;
+      left: 40%;
+    }
+
+    .el-icon-position {
+      font-size: 4rem;
+      color: rgb(255, 255, 255);
+      transition: all 5s ease-in-out;
+    }
+
+    .item-img {
+      position: relative;
+      width: 25vw;
+      height: 35vh;
+      overflow: hidden;
+
+      .image {
         width: 25vw;
         height: 35vh;
-        overflow: hidden;
-        .image {
-          width: 25vw;
-          height: 35vh;
-        }
-        .wrap-img {
-          width: 25vw;
-          height: 35vh;
-          position: absolute;
-          top: 35vh;
-          left: 0;
-          background-color: rgba(43, 212, 224, 0.3); /*使用CSS3 RGBA颜色值*/
-          transition: all 0.4s ease-in-out;
-        }
       }
-      .item-img:hover .wrap-img {
-        top: 0;
-      }
-      .item-img:hover .icon {
-        display: initial;
-        z-index: 8;
-      }
-      .item-img::before {
-        content: "";
+
+      .wrap-img {
+        width: 25vw;
+        height: 35vh;
         position: absolute;
-        top: 0px;
-        z-index: 5;
-        border-top: 7vh solid #333333;
-        border-right: 25vw solid transparent;
-      }
-      .item-content {
-        padding: 3vh 3vw;
-        h1 {
-          font-family: "Playfair Display", serif;
-          font-size: 2rem;
-          line-height: 3rem;
-        }
-        .c-say {
-          margin-top: 1vh;
-          font-family: Arial, Helvetica, sans-serif;
-          line-height: 2.5rem;
-        }
-        .c-day {
-          font-family: Arial, Helvetica, sans-serif;
-          color: #aaaaaa;
-          margin-top: 3vh;
-        }
-        .more{
-          line-height: 6rem;
-          font-size: 1.2rem;
-          color: rgb(255, 255, 255);
-        }
-        .more:hover {
-          color: rgb(59, 57, 57);
-        }
-      }
-      .item-footer {
-        position: relative;
-        //  margin-top: 3vh;
-        border-right: none;
-        height: 15vh;
-        background-color:#5bb5e9;
-        .f-content {
-          line-height: 10vh;
-          padding-left: 1vw;
-          font-size: 1.5rem;
-        }
-      }
-      .item-footer:hover {
-        background-color: #070707;
-        color: rgb(255, 255, 255);
-      }
-      .item-footer::after {
-        content: "";
-        z-index: 5;
-        position: absolute;
-        bottom: 0px;
-        border-bottom: 10vh solid #333333;
-        border-left: 25vw solid transparent;
+        top: 35vh;
+        left: 0;
+        background-color: rgba(43, 212, 224, 0.3);
+        transition: all 0.4s ease-in-out;
       }
     }
+
+    .item-img:hover .wrap-img {
+      top: 0;
+    }
+
+    .item-img:hover .icon {
+      display: initial;
+      z-index: 8;
+    }
+
+    .item-img::before {
+      content: "";
+      position: absolute;
+      top: 0px;
+      z-index: 5;
+      border-top: 7vh solid #333333;
+      border-right: 25vw solid transparent;
+    }
+
+    .item-content {
+      padding: 3vh 3vw;
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+
+      .c-say {
+        margin-top: 1vh;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 2.5rem;
+      }
+
+      .c-day {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #aaaaaa;
+        margin-top: 3vh;
+      }
+
+      .more {
+        line-height: 6rem;
+        font-size: 1.2rem;
+        color: rgb(255, 255, 255);
+      }
+
+      .more:hover {
+        color: rgb(59, 57, 57);
+      }
+    }
+
+    .item-footer {
+      position: relative;
+      //  margin-top: 3vh;
+      border-right: none;
+      height: 15vh;
+      background-color: #5bb5e9;
+
+      .f-content {
+        line-height: 10vh;
+        padding-left: 1vw;
+        font-size: 1.5rem;
+      }
+    }
+
+    .item-footer:hover {
+      background-color: #070707;
+      color: rgb(255, 255, 255);
+    }
+
+    .item-footer::after {
+      content: "";
+      z-index: 5;
+      position: absolute;
+      bottom: 0px;
+      border-bottom: 10vh solid #333333;
+      border-left: 25vw solid transparent;
+    }
   }
+}

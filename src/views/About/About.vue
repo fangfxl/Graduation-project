@@ -1,37 +1,56 @@
 <template>
-    <div class="about">
-        <h1> this is about</h1>
-      <label for="test">测试<input type="text" v-model="msg" placeholder="请输入文本" class="test" name="test"></label>  
+  <div class="about">
+    <articleList></articleList>
+    <div class="pages">
+      <div class="block">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="10"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="100"
+        ></el-pagination>
+      </div>
     </div>
+  </div>
 </template>
 <script>
+import articleList from "../../components/articleList/articleList.vue";
+export default {
+  name: "about",
 
-export default{
-    name:'about',
-    data(){
-        return{
-            msg:'aa'
-        }
+  data() {
+    return {
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4
+    };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
     },
-    created(){
-
-    },
-    methods:{
-       
-    },
-   
-    watch:{
-         '$route.path': function(newVal,oldVal){
-              if(newVal === '/home'){
-                  console.log('欢迎进入login')
-              }else if(newVal === '/about'){
-                console.log('欢迎进入register')
-              }
-          }
-
-    
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     }
-}
+  },
+  components: {
+    articleList,
+  },
+  created() {},
+  watch: {
+    "$route.path": function(newVal, oldVal) {
+      if (newVal === "/home") {
+        console.log("欢迎进入login");
+      } else if (newVal === "/about") {
+        console.log("欢迎进入register");
+      }
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "About.scss";

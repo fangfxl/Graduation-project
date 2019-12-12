@@ -20,7 +20,7 @@ export default {
            if(newVal === '/'){
                console.log('欢迎进入login')
            }else if(newVal === '/about'){
-             console.log('欢迎进入register')
+              console.log('欢迎进入register')
            }
        }
 
