@@ -14,7 +14,10 @@
           </el-input>
           <ul class="menu">
             <li>
-              <i class="el-icon-edit"></i> 写文章
+              推荐文章
+            </li>
+            <li>
+              个人中心
             </li>
             <li>登录|注册</li>
           </ul>
