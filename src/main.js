@@ -6,7 +6,9 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Axios from 'axios'
+import Print from 'vue-print-nb'
 
+Vue.use(Print);
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$http=Axios
