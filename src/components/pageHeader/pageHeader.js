@@ -9,23 +9,18 @@ export default {
       msg: String
     },
     methods:{
-   
+     // 路由跳转
+     goToUrl(url) {
+      this.$router.push({
+          path: url
+      });
+  }
+
     },
     mounted(){
-      
-
+     
     },
-    watch:{
-      '$route.path': function(newVal,oldVal){
-           if(newVal === '/'){
-               console.log('欢迎进入login')
-           }else if(newVal === '/about'){
-              console.log('欢迎进入register')
-           }
-       }
-
- 
- }
+    watch:{}
     
   };
   

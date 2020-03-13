@@ -3,9 +3,8 @@
     <div class="nav">
       <div class="nav-wrap">
         <div class="wrap-left">
-          <router-link to="/about" class="left-c">
-            <span>Xiao🐉</span>&nbsp;&nbsp;
-            <span>首页</span>
+          <router-link to="/" class="left-c">
+            <span >龙哥blogs</span>
           </router-link>
         </div>
         <div class="wrap-right">
@@ -13,13 +12,11 @@
             <el-button slot="append" type="primary" icon="el-icon-search">搜索</el-button>
           </el-input>
           <ul class="menu">
-            <li>
-              推荐文章
-            </li>
-            <li>
-              个人中心
-            </li>
-            <li>登录</li>
+              <router-link to="/" class="item-select">首页</router-link>
+              <router-link to="/about" class="item-select"> 推荐文章</router-link>
+              <router-link to="/home" class="item-select"> 个人中心</router-link>
+              <router-link to="/login" class="item-select">登录</router-link>
+              <router-link to="/register" class="item-select">注册</router-link>
           </ul>
         </div>
       </div>
@@ -28,7 +25,6 @@
 </template>
 <script src="./pageHeader.js"></script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "./pageHeader.scss";
 </style>

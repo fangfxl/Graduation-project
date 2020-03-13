@@ -8,10 +8,14 @@
     // position: fixed;
     // top: 0;
      background: rgb(255,255,255);
+     
+}
+*{
+    text-decoration: none;
 }
 .nav-wrap{
-    margin:  auto;
-    width: 1000px;
+    margin:  auto 80px;
+    // width: 1000px;
     text-align: center;
     display: flex;
     justify-content:space-between;
@@ -22,7 +26,7 @@
         span{
             font-weight: bold;
             font-size: 24px;
-            line-height: 80px;
+            line-height: 70px;
             color: #007fff;
         }
     }
@@ -37,11 +41,11 @@
         .menu{
             list-style-type: none;
             display: flex;
-            li{
-                margin-left: 25px;
-                font-size:18px;
-                color: #007fff;
-            }
+            .item-select{
+                    margin-left: 25px;
+                    font-size:18px;
+                    color: #007fff;
+                }
         }
     }
     
