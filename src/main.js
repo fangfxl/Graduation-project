@@ -7,7 +7,16 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import Print from 'vue-print-nb'
+// 富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+  
 
+export const eventBus = new Vue()
+
+Vue.use(VueQuillEditor)
 Vue.use(Print);
 Vue.use(ElementUI)
 Vue.config.productionTip = false

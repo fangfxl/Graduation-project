@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { eventBus } from '../../../main'
 export default {
   components: {},
   props: {},
@@ -119,9 +120,20 @@ export default {
             .then(res => {
               if(res.status == 200){
                 console.log(res)
-                  alert(res.data.massage)
+                  // alert(res.data.massage)
                 if(res.data.massage == "登录成功"){
-                   this.$router.push("/");
+                   this.$message({
+                      message: "登录成功",
+                      type: "success"
+                    });
+                    sessionStorage.setItem('personal', 'true');
+                    eventBus.$emit('personal', 'true')
+                    this.$router.push("/personal");
+                }else{
+                  this.$message({
+                      message: res.data.massage,
+                      type: "error"
+                    });
                 }
               }
             });
@@ -129,9 +141,17 @@ export default {
         register(){
           this.$http.post('/register',this.form1).then(res =>{
             if(res.status == 200){
-              alert(res.data.massage)
                 if(res.data.massage == '注册成功'){
+                  this.$message({
+                      message: res.data.massage,
+                      type: "success"
+                    });
                   this.isshows = true
+                }else{
+                  this.$message({
+                      message: res.data.massage,
+                      type: "error"
+                    });
                 }
             console.log(res)
             }

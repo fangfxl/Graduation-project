@@ -53,27 +53,7 @@
       </section>
     </div>
     <div class="articles">
-      <section class="box2">
-        <h2>
-          <p>首页<span>推荐</span></p>
-        </h2>
-
-        <div class="text">
-          <el-button type="text" @click="dialogVisible = true">点击打印</el-button>
-          <el-dialog
-            title="提示"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :before-close="handleClose">
-             <iframe :src="path"  frameborder="0" style="overflow:auto; height=100% width=100%"></iframe> 
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="print">打印</el-button>
-            </span>
-          </el-dialog>
-        </div>
-       
-      </section>
+      
       <section class="box2">
         <h2><p>文章<span>推荐</span></p></h2>
         <div class="left">
@@ -116,7 +96,16 @@
       </section>
     </div>
     <footer>
-      <p>Copyright©2016 基于帝国CMS搭建|Design by MAOLAI博客  粤ICP备15025043号</p>
+      <div class="chatme">
+         <img src="../../assets/show/wx.jpg" width="100" height="100" alt="">
+         <p class="chat">我的微信</p>
+      </div>
+     
+      <div>
+      <p class="shenming">站点声明：</p>
+      <p>1、本站是个人博客，不做任何商业用途。</p>
+      <p>2、Copyright©2020 基于vue.js+node.js+express搭建|Design by 龙哥blogs | <router-link to="/login" tag="a" class="item-select">站长登录</router-link></p>
+      </div>
       <div class="dandelion">
         <span class="smalldan"></span>
         <span class="bigdan"></span>
@@ -146,12 +135,7 @@ export default {
           })
           .catch(_ => {});
       },
-      // 打印方法
-     print(){
-       var  v = document.getElementsByTagName("iframe")[0].contentWindow;//获取iframe标签
-        v.window.focus();
-        v.window.print();
-     } ,
+     
     //获取文章列表
     getArticles(){
       this.$http.get('articles').then(res => {
@@ -473,11 +457,30 @@ export default {
   }
 }
 footer{
-    text-align: center;
-    line-height: 40px;
-    border-top: #E8E8E8 1px solid;
-    width: 1000px;
+   
+    padding: 20px 180px;
+    background: rgb(236, 231, 231);
+    display: flex;
+    // border-top: #E8E8E8 1px solid;
     margin: auto;
+     border-top: 10px solid #00C1DE;
+    .chatme{
+      padding: 0 30px 0 0 ;
+    }
+     .chat{
+        text-align: center;
+        margin: 0;
+        color: gray;
+      }
+    div{
+      .shenming{
+         margin: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        color:  #007fff;
+      }
+     
+    }
     p{
       display: block;
       margin-block-start: 1em;

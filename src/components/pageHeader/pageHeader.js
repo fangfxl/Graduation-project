@@ -3,6 +3,7 @@ export default {
     data(){
       return {
         input2:'',
+        personal:false,//站长登录显示
       }
     },
     props: {
