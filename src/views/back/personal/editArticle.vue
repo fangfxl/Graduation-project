@@ -28,7 +28,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" native-type="submit">保存</el-button>
-      <el-button @click="goPersonal()">取消</el-button>
+      <el-button @click="goSort()">取消</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -77,6 +77,7 @@ export default {
     }
   },
   methods: {
+   
     // 获取分类
     getSort() {
       this.$http.get("sort").then(res => {
@@ -100,14 +101,14 @@ export default {
     },
     //修改文章
     saveArticle() {
-      console.log(this.article);
       this.$http.put("updateArticle", this.article).then(res => {
-        console.log(res);
-        this.$message({
+      if(res.status == 200){
+         this.$message({
           message: "保存成功",
           type: "success"
         });
         this.$router.push("/personal"); //创建成功跳回文章列表页
+      }
       });
     }
   },

@@ -1,23 +1,18 @@
 <template>
-  <div>
-    <el-table :data="dataShow" stripe highlight-current-row>
+  <div class="sort_list">
+    <el-table :data="dataShow" stripe  size ="small">
       <el-table-column type="index" label="ID" width="60"></el-table-column>
-      <el-table-column prop="title" label="标题" width="150"></el-table-column>
-      <el-table-column prop="time" label="创建时间" width="250"></el-table-column>
-      <el-table-column prop="views" label="浏览量" width="150"></el-table-column>
-      <el-table-column prop="comment_count" label="点赞量" width="150"></el-table-column>
-      <el-table-column prop="sort_id" label="分类" width="150"></el-table-column>
-      <!-- <el-table-column prop="content" label="内容"></el-table-column> -->
-      <el-table-column prop="author" label="作者" width="100"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="300">
-        <!-- <template slot="header" slot-scope="scope">
+      <el-table-column prop="Sort_name" label="类名" ></el-table-column>
+      <el-table-column prop="sort_description" label="描述" ></el-table-column>
+      <el-table-column fixed="right" label >
+        <template slot="header" slot-scope="scope">
           <el-input placeholder="请输入标题" v-model="input2">
             <el-button slot="append" type="primary" icon="el-icon-search">搜索</el-button>
           </el-input>
-        </template> -->
+        </template>
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row._id)" type="primary" size="small">查看评论</el-button>
-          <el-button @click="edit(scope.row._id)" type="primary" size="small">编辑</el-button>
+          <!-- <el-button @click="edit(scope.row._id)" type="primary" size="small">查看评论</el-button> -->
+          <el-button  @click="edit(scope.row._id)" type="primary" size="small">编辑</el-button>
           <el-button @click="remove(scope.row._id)" size="small" type="danger">删除</el-button>
         </template>
       </el-table-column>
@@ -30,7 +25,7 @@
         :page-sizes="[5, 10, 1, 2]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total=" articles.length"
+        :total="sorts.length"
       ></el-pagination>
     </div>
   </div>
@@ -40,10 +35,10 @@
 export default {
   data() {
     return {
-      articles: [],
+      dialogVisible: false,
+      sorts: [],
       pageSize: 5,
       currentPage: 1,
-      search: "", //搜索
       input2: ""
     };
   },
@@ -52,15 +47,23 @@ export default {
       let start = (this.currentPage - 1) * this.pageSize;
       let end = Math.min(
         this.currentPage * this.pageSize,
-        this.articles.length
+        this.sorts.length
       );
-      return this.articles.slice(start, end);
+      return this.sorts.slice(start, end);
     },
     pageNum: function() {
-      return Math.round(this.articles.length / this.pageSize) || 1;
+      return Math.round(this.sorts.length / this.pageSize) || 1;
     }
   },
   methods: {
+    // 关闭弹窗
+     handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
     // 分页
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -71,32 +74,33 @@ export default {
       console.log(`当前页: ${val}`);
       this.currentPage = val;
     },
-    getArticles() {
-      this.$http.get("articles").then(res => {
-        this.articles = res.data;
-        console.log(this.articles);
+    // 初始化列表
+    getSorts() {
+      this.$http.get("sort").then(res => {
+        this.sorts = res.data;
       });
     },
-    // 获取图片地址
-    getImgUrl(icon) {
-      return require("@/assets/show/" + icon);
-    },
+    // 编辑分类
     edit(id) {
-      this.$router.push({path:'/personal/editArticle', query:{article_id : id}});
+      console.log("================")
+      console.log(id)
+        console.log("================")
+        this.$router.push({path:'editSort', query:{sort_id : id}});
     },
+    // 删除分类
     remove(id) {
-      this.$confirm("此操作将永久删除该博文, 是否继续?", "提示", {
+      this.$confirm("确定删除该分类吗?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          this.$http.delete(`deleteArticles/${id}`).then(() => {
+          this.$http.delete(`deleteSort/${id}`).then(() => {
             this.$message({
               message: "文章删除成功",
               type: "success"
             });
-            this.getArticles();
+            this.getSorts();
           });
         })
         .catch(() => {
@@ -109,15 +113,17 @@ export default {
     }
   },
   created() {
-    this.getArticles();
+    this.getSorts();
   }
 };
 </script>
 <style lang="scss"  >
+.sort_list{
+  // width: 1500px;
+  margin: 0 auto;
+}
 .list {
-  // border: 1px solid gray;
   .row_title {
-    // margin-bottom: 15px;
     border: 1px solid gray;
   }
 }
