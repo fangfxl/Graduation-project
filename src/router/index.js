@@ -17,6 +17,13 @@ import editSort from '../views/back/personal/editSort.vue'
 import labelList from '../views/back/label/labelList.vue'
 import addLabel from '../views/back/label/addLabel.vue'
 import editLabel from '../views/back/label/editLabel.vue'
+
+//留言
+import leaveMessage from '../components/leaveMessage/leaveMessage.vue'
+//时间线
+import timeLine from '../components/timeLine/timeLine.vue'
+//搜索
+import searchpage from '../components/searchpage/searchpage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -96,6 +103,21 @@ const routes = [
       }
     ]
   
+  },
+  {
+    path: '/leaveMessage',
+    name: 'leaveMessage',
+    component: leaveMessage
+  },
+  {
+    path: '/timeLine',
+    name: 'timeLine',
+    component: timeLine
+  },
+  {
+    path: '/searchpage',
+    name: 'searchpage',
+    component: searchpage
   },
  
  

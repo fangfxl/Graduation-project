@@ -7,7 +7,6 @@
       <el-table-column prop="views" label="浏览量" width="150"></el-table-column>
       <el-table-column prop="comment_count" label="点赞量" width="150"></el-table-column>
       <el-table-column prop="sort_id" label="分类" width="150"></el-table-column>
-      <!-- <el-table-column prop="content" label="内容"></el-table-column> -->
       <el-table-column prop="author" label="作者" width="100"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <!-- <template slot="header" slot-scope="scope">

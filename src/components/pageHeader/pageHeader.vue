@@ -15,8 +15,8 @@
               <router-link to="/" class="item-select">首页</router-link>
               <router-link to="/about" class="item-select">博文日记</router-link>
               <router-link to="/home" class="item-select"> 关于我</router-link>
-              <router-link to="/login" class="item-select">时间轴</router-link>
-              <router-link to="/register" class="item-select">留言</router-link>
+              <router-link to="/timeLine" class="item-select">时间轴</router-link>
+              <router-link to="/leaveMessage" class="item-select">留言</router-link>
                <router-link to="/personal" class="item-select" v-show="personal"> 个人中心</router-link>
                <li class="item-select"  v-show="personal" @click="login_out()">登出</li>
 

@@ -54,11 +54,11 @@ export default {
         sort_id:'',
         label_id:''
       },
-      sorts:'',//分类
-      labels:'',//标签
-      options:'',
-      value:'',
-      content: `<p>hello world</p>`,
+      sorts:[],//分类
+      labels:[],//标签
+      // options:'',
+      // value:'',
+      // content: `<p>hello world</p>`,
       editorOption: {},
       modules:{
             toolbar:[

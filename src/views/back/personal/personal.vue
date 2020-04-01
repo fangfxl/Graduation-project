@@ -36,6 +36,28 @@
             </el-menu-item-group>
             
           </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-message"></i>评论管理
+            </template>
+            <el-menu-item-group>
+              <template slot="title"></template>
+              <el-menu-item index="3"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
+              <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="el-icon-message"></i>留言管理
+            </template>
+            <el-menu-item-group>
+              <template slot="title"></template>
+              <el-menu-item index="3"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
+              <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
         </el-menu>
       </el-aside>
       <el-main>

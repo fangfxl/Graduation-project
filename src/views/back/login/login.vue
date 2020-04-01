@@ -16,7 +16,7 @@
 
                     <el-form-item>
                         <el-button type="primary" native-type="submit">登录</el-button>
-                        <el-button @click="goregister()">未注册！去注册</el-button>
+                        <!-- <el-button @click="goregister()">未注册！去注册</el-button> -->
                     </el-form-item>
                     <el-form-item>
                         <span class="fr" ref="loginRef"></span>

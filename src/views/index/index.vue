@@ -66,7 +66,7 @@
                  <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享">
               </figure>
               <ul>
-                <p class="article-content">{{ article.content}} </p>
+                <p class="article-content" v-html="article.content">{{ article.content}} </p>
                 <a title="本站个人博客模板下载分享" href="#" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
               </ul>
               <p class="dateview">
@@ -164,6 +164,7 @@ export default {
   width: 100%;
   font: 14px "宋体", Arial, Helvetica, sans-serif;
   // border: 1px solid green;
+  background-color: #E9EAED;
 }
 .banner{
   width: 100%;
@@ -370,6 +371,7 @@ export default {
         .article-content{
            display: inline-block;
            width: 500px;
+           height: 60px;
            overflow: hidden;//隐藏超出
           display:-webkit-box;
           -webkit-box-orient: vertical;

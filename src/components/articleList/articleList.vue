@@ -1,40 +1,79 @@
 <template>
-  <div class="articleList">
-    <div class="container">
-      <ul class="article">
-        <el-row :gutter="10" v-for="(index, n) in 36" :key="n">
-          <el-col :sm="10" :md="8" :lg="5" :xl="5" hidden-xs-only>
-            <div class="left">
-              <a href="#">
-                <img src="../../assets/img/article2.jpg" alt />
-              </a>
-            </div>
-          </el-col>
-          <el-col :sm="14" :md="16" :lg="19" :xl="19">
-            <div class="right">
-              <div class="top">
-                <a href="#">Zaha Hadid：沙特利雅得地铁站</a>
-                <p>
-                  Zaha Hadid建筑事务所获得了沙特阿拉伯利雅得地
-                  铁站竞赛项目的第一名。地铁站作为利雅得全新公
-                  共交通系统的组成部分，坐落于Abdullah国王金融
-                  区的一隅，将成为城市六条地铁线路中的三条的换乘站
-                  。新的地铁站落成后将会更好地融入阿卜杜拉国王金融区，更
-                  好地满足该金融区多样化的运输需求，符合该地长远发展利益。
-                </p>
-              </div>
-              <div class="bottom">
-                <span  class="author">fangxiaolong</span>
-                <span  class="time">2016-09-09</span>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </ul>
+<div class="page">
+  <div class="page1">
+    <div class="left">
+      <div class="info">
+        <div class="image">
+          <img src="../../assets/show/wx.jpg" alt="">
+        </div>
+        <div class="title">
+          <h2>博文日志</h2>
+          <p>个人博客日记，记录生活的点点滴滴，聊聊互联网的那些事，那些人，毁三观，扭三观，正三观。</p>
+        </div>
+      </div>
+      <div class="content">
+          <div class="list" v-for="(article , index ) in  dataShow" :key="index">
+              <h3>
+                <a class="article-title" href="#" >{{ article.title }}</a>
+              </h3>
+              <figure>
+                <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享" />
+              </figure>
+              <ul>
+                <p class="article-content" v-html="article.content">{{ article.content}}</p>
+                <a title="本站个人博客模板下载分享" href="#" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+              </ul>
+              <p class="dateview">
+                <i class="el-icon-time"></i>
+                <span>{{article.time}}</span>
+                <span>
+                  分类：[
+                  <a href="#">{{ article.sort}}</a> ]
+                </span>
+              </p>
+          </div>
+        <div class="block">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="[5, 10, 15, 20]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total=" articles.length"
+            ></el-pagination>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="right">
+       <el-card class="box-card">
+            <p><span class="sort">点击排行</span></p>
+            <img class="welcome" src="../../assets/show/show2.jpg" alt="欢迎来到龙哥博客">
+            <div class="text item" v-for="o in 4" :key="o">
+                {{'别表内容'+ o}}
+            </div>
+          </el-card>
+    </div>
+   
+</div>
+ <footer>
+      <div class="chatme">
+         <img src="../../assets/show/wx.jpg" width="100" height="100" alt="">
+         <p class="chat">我的微信</p>
+      </div>
+     
+      <div>
+      <p class="shenming">站点声明：</p>
+      <p>1、本站是个人博客，不做任何商业用途。</p>
+      <p>2、Copyright©2020 基于vue.js+node.js+express搭建|Design by 龙哥blogs | <router-link to="/login" tag="a" class="item-select">站长登录</router-link></p>
+      </div>
+      
+    </footer>
+</div>
 </template>
-<script src="./articleList.js"></script>
+<script src="./articleList.js">
+
+</script>
 <style lang="scss" scoped>
 @import "articleList.scss";
 </style>
