@@ -24,6 +24,12 @@ import leaveMessage from '../components/leaveMessage/leaveMessage.vue'
 import timeLine from '../components/timeLine/timeLine.vue'
 //搜索
 import searchpage from '../components/searchpage/searchpage.vue'
+//文章详情页
+import details from '../components/details/details.vue'
+//博文
+import blogs from '../components/articleList/articleList.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -118,6 +124,16 @@ const routes = [
     path: '/searchpage',
     name: 'searchpage',
     component: searchpage
+  },
+  {
+    path: '/details',
+    name: 'details',
+    component: details
+  },
+  {
+    path: '/blogs',
+    name: 'blogs',
+    component: blogs
   },
  
  

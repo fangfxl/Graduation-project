@@ -12,23 +12,24 @@
         </div>
       </div>
       <div class="content">
+          <h2 class="menu"><span class="title">最新博文</span></h2>
           <div class="list" v-for="(article , index ) in  dataShow" :key="index">
               <h3>
-                <a class="article-title" href="#" >{{ article.title }}</a>
+                <a class="article-title"  href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
               </h3>
               <figure>
                 <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享" />
               </figure>
               <ul>
                 <p class="article-content" v-html="article.content">{{ article.content}}</p>
-                <a title="本站个人博客模板下载分享" href="#" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+                <a title="本站个人博客模板下载分享" href="javascript:void(0)"  @click="goToDetails(article._id)"  class="readmore">阅读全文&gt;&gt;</a>
               </ul>
               <p class="dateview">
                 <i class="el-icon-time"></i>
                 <span>{{article.time}}</span>
                 <span>
                   分类：[
-                  <a href="#">{{ article.sort}}</a> ]
+                  <a href="#">{{article.sort_id}}</a> ]
                 </span>
               </p>
           </div>

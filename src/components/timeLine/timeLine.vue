@@ -86,7 +86,7 @@ export default {
 
 <style  lang="scss" scoped>
 .page{
-  width: 98vw;
+  // width: 98vw;
   background-color: #E9EAED;
   padding: 30px 0;
 }

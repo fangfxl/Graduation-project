@@ -55,27 +55,27 @@
     <div class="articles">
       
       <section class="box2">
-        <h2><p>文章<span>推荐</span></p></h2>
+        <!-- <h2><p>文章<span>推荐</span></p></h2> -->
+        
         <div class="left">
-         
-        <div class="list " v-for="(article , index ) in articles" :key="index">
-              <h3>
-                <a class="article-title" href="#">{{ article.title }}</a>
-              </h3>
-              <figure>
-                 <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享">
-              </figure>
-              <ul>
-                <p class="article-content" v-html="article.content">{{ article.content}} </p>
-                <a title="本站个人博客模板下载分享" href="#" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
-              </ul>
-              <p class="dateview">
-                <i class="el-icon-time"></i>
-                <span>{{article.time}}</span>
-                <span>分类：[ <a href="#">{{ article.sort}}</a> ] </span>
-              </p>    
-        </div>
-         
+          <h2> <span class="title">最新博文</span> </h2>
+          <div class="list " v-for="(article , index ) in articles" :key="index">
+                <h3>
+                  <a class="article-title" href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
+                </h3>
+                <figure>
+                  <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享">
+                </figure>
+                <ul>
+                  <p class="article-content" v-html="article.content">{{ article.content}} </p>
+                  <a title="本站个人博客模板下载分享" href="javascript:void(0)"  @click="goToDetails(article._id)" class="readmore">阅读全文&gt;&gt;</a>
+                </ul>
+                <p class="dateview">
+                  <i class="el-icon-time"></i>
+                  <span>{{article.time}}</span>
+                  <span>分类：[ <a href="#">{{ article.sort}}</a> ] </span>
+                </p>    
+          </div>
         </div>
         <aside class="right">
           <div class="profile-card">
@@ -135,7 +135,10 @@ export default {
           })
           .catch(_ => {});
       },
-     
+     //阅读全文
+    goToDetails(id) {
+      this.$router.push({path:'/details', query:{article_id : id}});
+    },
     //获取文章列表
     getArticles(){
       this.$http.get('articles').then(res => {
@@ -236,7 +239,7 @@ export default {
 .carefully{
   width: 100%;
   .box1{
-    width: 1000px;
+    width: 1300px;
     margin: auto;
     overflow: hidden;
   }
@@ -261,9 +264,10 @@ export default {
     }
   }
   ul{
+    display: flex;
     li{
       margin: 3px;
-      float: left;
+      // float: left;
       display: block;
       padding: 5px 5px 6px 5px;
       -webkit-transition: all 1s;
@@ -301,16 +305,27 @@ export default {
 .articles{
   // position: absolute;
   .box2{
-    width: 1000px;
+    width: 1200px;
     margin: auto;
     overflow: hidden;
     display: block;
   }
   h2{
+
     font: 18px "微软雅黑", Arial, Helvetica, sans-serif;
-    color: #444;
-    font-weight: bold;
-    background: url(../../assets/fenge.png) repeat-x 20px center;
+    
+    border-bottom: 1px solid rgb(238, 231, 231);
+    .title{
+      display: inline-block;
+      color: #444;
+      font-weight: bold;
+      line-height: 40px;
+      border-bottom: 2px solid #099B43;
+    }
+    .title:hover{
+      width: 85px;
+    }
+    // background: url(../../assets/fenge.png) repeat-x 20px center;
     p{
     background: #fff;
     width: 90px;
@@ -320,9 +335,13 @@ export default {
     }
   }
   .left{
-    width: 740px;
+    width: 840px;
     overflow: hidden;
+    margin: 20px 20px 10px 0 ;
+    padding: 15px 25px;
     float: left;
+    background-color: #FFFFFF;
+     border-radius: 8px;
     .list{
       border-bottom: 1px dotted rgb(235, 228, 228);
     }
@@ -356,7 +375,7 @@ export default {
     }
     ul{
       float: left;
-      width: 520px;
+      width: 615px;
       margin: 10px 0px 0 15px;
       line-height: 20px;
       display: block;
@@ -370,7 +389,7 @@ export default {
         }
         .article-content{
            display: inline-block;
-           width: 500px;
+           width: 620px;
            height: 60px;
            overflow: hidden;//隐藏超出
           display:-webkit-box;
@@ -399,15 +418,15 @@ export default {
     }
   }
   .right{
-    margin-top: 25px;
+    margin-top: 20px;
     float: left;
-    width: 260px;
+    width: 290px;
     height: 1200px;
     .profile-card{
       height: 260px;
       overflow: hidden;
       margin-bottom: 20px;
-      border-radius: 3px;
+      border-radius: 6px;
       background: url(../../assets/quote-bg.png) no-repeat top right rgba(42,42,42,1);
       box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(0,0,0,.7);
       h1{
