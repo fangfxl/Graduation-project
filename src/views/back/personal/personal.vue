@@ -2,7 +2,7 @@
   <el-container style=" border: 1px solid #eee">
     <el-container>
       <el-aside width="200px" style="height:850px; background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '2', '3']">
+        <el-menu :default-openeds="['1']">
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-message"></i>博文管理
@@ -31,8 +31,8 @@
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
-              <el-menu-item index="3"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
-              <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
+              <el-menu-item index="5"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
+              <el-menu-item index="6"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>

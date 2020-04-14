@@ -1,17 +1,18 @@
 <template>
   <div class="sort_list">
-    <el-table :data="dataShow" stripe  size ="small">
+    <el-table :data="dataShow.filter(data => !search || data.Sort_name.toLowerCase().includes(search.toLowerCase()))" stripe  size ="small">
       <el-table-column type="index" label="ID" width="60"></el-table-column>
       <el-table-column prop="Sort_name" label="类名" ></el-table-column>
       <el-table-column prop="sort_description" label="描述" ></el-table-column>
       <el-table-column fixed="right" label >
         <template slot="header" slot-scope="scope">
-          <el-input placeholder="请输入标题" v-model="input2">
-            <el-button slot="append" type="primary" icon="el-icon-search">搜索</el-button>
-          </el-input>
-        </template>
+              <el-input
+                v-model="search"
+                size="mini"
+                placeholder="输入关键字搜索"/>
+                <i @click="edit(scope.row._id)" style="display:none"></i>
+           </template>
         <template slot-scope="scope">
-          <!-- <el-button @click="edit(scope.row._id)" type="primary" size="small">查看评论</el-button> -->
           <el-button  @click="edit(scope.row._id)" type="primary" size="small">编辑</el-button>
           <el-button @click="remove(scope.row._id)" size="small" type="danger">删除</el-button>
         </template>
@@ -22,7 +23,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[5, 10, 1, 2]"
+        :page-sizes="[5, 10, 15, 20]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="sorts.length"
@@ -39,7 +40,8 @@ export default {
       sorts: [],
       pageSize: 5,
       currentPage: 1,
-      input2: ""
+      input2: "",
+      search:''
     };
   },
   computed: {

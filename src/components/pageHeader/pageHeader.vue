@@ -9,7 +9,7 @@
         </div>
         <div class="wrap-right">
           <el-input placeholder="请输入内容" v-model="input2">
-            <el-button slot="append" type="primary" icon="el-icon-search">搜索</el-button>
+            <el-button slot="append" type="primary" icon="el-icon-search" @click="Search()">搜索</el-button>
           </el-input>
           <ul class="menu">
               <router-link to="/" class="item-select">首页</router-link>
@@ -39,6 +39,16 @@ export default {
       msg: String
     },
     methods:{
+      /**
+       * @description 搜索
+       * */
+      Search(){
+        if(this.input2){
+          this.$router.push({path:'/searchpage', query:{ search :this.input2} });
+        }else{
+          this.$router.push('/blogs');
+        }
+      },
      // 路由跳转
      goToUrl(url) {
       this.$router.push({
@@ -58,10 +68,10 @@ export default {
     watch:{},
     created() {
       this.personal = sessionStorage.getItem('personal')
-      console.log(this.personal)
+      // console.log(this.personal)
       eventBus.$on('personal' ,(message) => {
         this.personal = message
-        console.log(this.personal);
+        // console.log(this.personal);
       })
     }
   };

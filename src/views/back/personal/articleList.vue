@@ -1,19 +1,21 @@
 <template>
   <div>
-    <el-table :data="dataShow" stripe highlight-current-row>
+    <el-table :data="dataShow.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))" stripe highlight-current-row >
       <el-table-column type="index" label="ID" width="60"></el-table-column>
-      <el-table-column prop="title" label="标题" width="150"></el-table-column>
+      <el-table-column prop="title" label="标题" width="250" class="title"></el-table-column>
       <el-table-column prop="time" label="创建时间" width="250"></el-table-column>
       <el-table-column prop="views" label="浏览量" width="150"></el-table-column>
       <el-table-column prop="comment_count" label="点赞量" width="150"></el-table-column>
       <el-table-column prop="sort_id" label="分类" width="150"></el-table-column>
       <el-table-column prop="author" label="作者" width="100"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
-        <!-- <template slot="header" slot-scope="scope">
-          <el-input placeholder="请输入标题" v-model="input2">
-            <el-button slot="append" type="primary" icon="el-icon-search">搜索</el-button>
-          </el-input>
-        </template> -->
+           <template slot="header" slot-scope="scope">
+              <el-input
+                v-model="search"
+                size="mini"
+                placeholder="输入关键字搜索"/>
+                <i @click="edit(scope.row._id)" style="display:none"></i>
+           </template>
         <template slot-scope="scope">
           <el-button @click="edit(scope.row._id)" type="primary" size="small">查看评论</el-button>
           <el-button @click="edit(scope.row._id)" type="primary" size="small">编辑</el-button>
@@ -26,7 +28,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[5, 10, 1, 2]"
+        :page-sizes="[5, 10, 15, 20]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total=" articles.length"
@@ -40,10 +42,11 @@ export default {
   data() {
     return {
       articles: [],
+      articlesAll:[],
       pageSize: 5,
       currentPage: 1,
-      search: "", //搜索
-      input2: ""
+      search: '', //搜索
+      input2: ''
     };
   },
   computed: {
@@ -60,6 +63,18 @@ export default {
     }
   },
   methods: {
+    //搜索
+    /**
+       * @description 搜索
+       * */
+      Search(){
+        var searchs = this.search;
+        if(searchs){
+          this.articles = this.articlesAll.filter(item => item.includes(searchs));
+        }else{
+          this.articles = this.articlesAll;
+        }
+      },
     // 分页
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -73,6 +88,7 @@ export default {
     getArticles() {
       this.$http.get("articles").then(res => {
         this.articles = res.data;
+        this.articlesAll = res.data;
         console.log(this.articles);
       });
     },
@@ -119,5 +135,9 @@ export default {
     // margin-bottom: 15px;
     border: 1px solid gray;
   }
+}
+.title {
+  overflow: hidden;
+ 
 }
 </style>

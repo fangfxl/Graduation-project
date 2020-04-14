@@ -80,6 +80,9 @@ export default{
             articles:[],//文章列表
             pageSize: 15,
             currentPage: 1,
+            search:'',
+            articlesAll:[],
+
         }
     },
     computed: {
@@ -99,8 +102,15 @@ export default{
          //获取文章列表
     getArticles(){
         this.$http.get('articles').then(res => {
-          this.articles = res.data.reverse();
-           console.log(this.articles)
+          this.articles = res.data;
+          this.articlesAll = res.data;
+          if(this.search){
+            let i = this.search
+          this.articles = this.articlesAll.filter(item => item.title.includes(i));
+          this.search = ''
+        }else{
+          // this.articles = this.articlesAll;
+        }
         })
       },
        // 获取图片地址
@@ -118,8 +128,12 @@ export default{
       this.currentPage = val;
     },
     }, 
-    created() {},
+    created() {
+      this.search = this.$route.query.search;
+       console.log(this.search,"=========")
+    },
     mounted() {
+       
       this.getArticles();
     }
 }

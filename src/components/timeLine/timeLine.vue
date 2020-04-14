@@ -26,9 +26,23 @@
         :total=" articles.length"
       ></el-pagination>
     </div>
-        </div>
-    </div>
     
+    </div>
+    </div>
+    <footer>
+      <div class="chatme">
+        <img src="../../assets/show/wx.jpg" width="100" height="100" alt />
+        <p class="chat">我的微信</p>
+      </div>
+      <div>
+        <p class="shenming  end">站点声明：</p>
+        <p class="end">1、本站是个人博客，不做任何商业用途。</p>
+        <p class="end">
+          2、Copyright©2020 基于vue.js+node.js+express搭建|Design by 龙哥blogs |
+          <router-link to="/login" tag="a" class="item-select">站长登录</router-link>
+        </p>
+      </div>
+    </footer>
 </div>
 </template>
 
@@ -96,6 +110,7 @@ export default {
   margin: auto;
   border-radius: 10px;
   padding: 20px 15px;
+  margin-bottom: 20px;
 }
 .title{
   line-height: 50px;
@@ -115,4 +130,66 @@ export default {
   background-color: rgb(207, 200, 200);
 }
 
+footer {
+  padding: 20px 180px;
+  background: rgb(236, 231, 231);
+  display: flex;
+  // border-top: #E8E8E8 1px solid;
+  margin: auto;
+  border-top: 10px solid #00c1de;
+  .chatme {
+    padding: 0 30px 0 0;
+  }
+  .chat {
+    line-height: 25px;
+    text-align: center;
+    margin: 0;
+    color: gray;
+  }
+  div {
+    .shenming {
+      margin: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007fff;
+    }
+  }
+  .end {
+    line-height: 25px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  .dandelion {
+    display: block;
+    span {
+      display: block;
+      position: fixed;
+      z-index: 9999999999;
+      bottom: 0px;
+      background: url(../../assets/pgy.png) no-repeat;
+      -webkit-animation: ball-x 3s linear 2s infinite;
+      -moz-animation: ball-x 3s linear 2s infinite;
+      animation: ball-x 3s linear 2s infinite;
+      -webkit-transform-origin: bottom center;
+      -moz-transform-origin: bottom center;
+      transform-origin: bottom center;
+    }
+    .smalldan {
+      width: 36px;
+      height: 60px;
+      left: 21px;
+      background-position: 0 -90px;
+      border: 0px solid red;
+    }
+    .bigdan {
+      width: 64px;
+      height: 115px;
+      left: 47px;
+      background-position: -86px -36px;
+    }
+  }
+}
 </style>

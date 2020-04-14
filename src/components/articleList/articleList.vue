@@ -50,7 +50,7 @@
        <el-card class="box-card">
             <p><span class="sort">点击排行</span></p>
             <img class="welcome" src="../../assets/show/show2.jpg" alt="欢迎来到龙哥博客">
-            <div class="text item" v-for="o in 4" :key="o">
+            <div class="text item" v-for="o in 14" :key="o">
                 {{'别表内容'+ o}}
             </div>
           </el-card>

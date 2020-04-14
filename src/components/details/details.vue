@@ -13,7 +13,7 @@
             </el-breadcrumb>
           </div>
           <div class="content">
-            <h2>{{this.article.title}}</h2>
+            <h2><span>{{this.article.title}}</span></h2>
             <div class="info">
               <span>作者: {{this.article.author}}</span>
               <span>{{this.article.time}}</span>
@@ -37,7 +37,30 @@
               <el-button class="commentbtn" type="info" round @click="goback()">返回上一页</el-button>
             </div>
           </div>
-
+          <div class="comment">
+            <h3 class="comment_title"><span>文章评论</span></h3>
+            <div class="comment_form">
+              <p class="speak">来说两句吧。。。。</p>
+               <el-form ref="messages" @submit.native.prevent="leaveMSG()"   :model="messages" label-width="120px">
+                    <el-form-item label="用户名:">
+                        <el-input v-model="messages.name" class="input-width" @input="replaceSpace()" clearable placeholder="请输入姓名或昵称"></el-input>
+                    </el-form-item>
+                     <!-- <el-form-item label="网址:">
+                        <el-input v-model="messages.Iurl" class="input-width" @input="replaceSpace()" clearable placeholder="请输入您博客地址"></el-input>
+                    </el-form-item> -->
+                    <el-form-item label="评论内容">
+                        <el-input type="textarea" v-model="messages.content" @input="replaceSpace()" 
+                                  clearable placeholder="请输入您的留言"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" native-type="submit">提交</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <span class="fr" ref="loginRef"></span>
+                    </el-form-item>
+                </el-form>
+            </div>
+          </div>
         </div>
       </div>
       <div class="right">
@@ -72,6 +95,12 @@ export default {
   name: "articleList",
   data() {
     return {
+       messages:{
+        createTime:'',
+        content:'',
+        name:'',
+        Iurl:''
+      },
       article: {},
       detail:{
         id:""
@@ -179,6 +208,24 @@ border: 2px solid gray;
   padding: 30px 0 0 0;
   .label{
     
+  }
+}
+.comment{
+  .comment_title{
+    line-height: 40px;
+    border-bottom: 1px solid gray;
+  }
+  span{
+    display: inline-block;
+    padding: 0 5px;
+    line-height: 40px;
+    border-bottom: 2px solid green;
+  }
+  span:hover{
+    width: 85px;
+  }
+  .speak{
+    line-height: 40px;
   }
 }
 .content {

@@ -22,6 +22,7 @@ export default {
     }
   },
   methods: {
+    
     //阅读全文
     goToDetails(id) {
       console.log(id)
