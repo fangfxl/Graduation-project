@@ -163,7 +163,6 @@ export default {
     border: 10px solid #5190ac;
     border-color: transparent transparent #ffffff transparent;
   }
-  p {
-  }
+  
 }
 </style>
