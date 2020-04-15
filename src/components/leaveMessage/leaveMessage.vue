@@ -43,12 +43,7 @@
             <div class="r_info" v-show="leaveMessage.isShow">
               <span class="info_title">发表留言</span>
               <span class="l_replay" @click="toggle1(leaveMessage)">取消回复</span>
-              <el-form
-                ref="replayMessage"
-                @submit.native.prevent="replayLM(leaveMessage)"
-                :model="replayMessage.replay"
-                label-width="120px"
-              >
+              <el-form ref="replayMessage" @submit.native.prevent="replayLM(leaveMessage)":model="replayMessage.replay" label-width="120px" >
                 <el-form-item label="您的姓名或昵称:">
                   <el-input
                     v-model="replayMessage.replay.name"
@@ -86,7 +81,7 @@
           <div class="r_showLeave" v-for="(item,index) in leaveMessage.replay" :key="index">
             <div class="l_head">
               <el-avatar :size="50" icon="el-icon-user-solid" class="head"></el-avatar>
-              <span class="l_name">{{item.name}}&nbsp;&nbsp;说1：</span>
+              <span class="l_name">{{item.name}}&nbsp;&nbsp;说：</span>
             </div>
             <p class="l_time">{{item.replayTime}}</p>
             <div class="l_content">{{item.content}}</div>

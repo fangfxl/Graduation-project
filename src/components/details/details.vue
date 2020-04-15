@@ -20,7 +20,7 @@
               <span>【{{this.article.sort_id}}】</span>
               <span>{{this.article.views}}人已围观</span>
             </div>
-            <img :src="getImgUrl(this.article.image)"  class="articlepic">
+            <img :src="getImgUrl( this.article.image || 'show1.jpg' )"  class="articlepic">
             <div class="article_content" v-html="this.article.content">{{this.article.content}}</div>
             <div class="tags">
               <span>Tages: </span>
@@ -55,12 +55,56 @@
                     <el-form-item>
                         <el-button type="primary" native-type="submit">提交</el-button>
                     </el-form-item>
-                    <el-form-item>
-                        <span class="fr" ref="loginRef"></span>
-                    </el-form-item>
                 </el-form>
             </div>
           </div>
+          <!-- 评论列表 -->
+          <div class="pilun">
+            <h2 class="record">
+              <span>留言记录</span>
+            </h2>
+            <div class="showLeave" v-for="(item,index) in comments" :key="index">
+              <div class="l_head" >
+                <el-avatar :size="50" icon="el-icon-user-solid" class="head"></el-avatar>
+                <span class="l_name">{{item.username}}&nbsp;&nbsp;说：</span>
+              </div>
+               <p class="l_time">{{item.time}}</p>
+               <div class="l_content">{{item.content}}</div>
+              <div class="replay">
+                 <span class="l_replay" @click="toggle(item)">回复</span>
+                   <div class="r_info"  v-show="item.isShow">
+                      <span class="info_title">发表留言</span>
+                       <span class="l_replay" @click="toggle1(item)">取消回复</span>
+                       <el-form ref="replayComments" @submit.native.prevent="replayLM(leaveMessage)" :model="replayComments.replay" label-width="120px" >
+                          <el-form-item label="您的姓名或昵称:">
+                            <el-input
+                              v-model="replayComments.replay.name"
+                              class="input-width"
+                              clearable
+                              placeholder="请输入姓名或昵称"
+                            ></el-input>
+                          </el-form-item>
+                          <el-form-item label="留言内容">
+                            <el-input
+                              type="textarea"
+                              v-model="replayComments.replay.content"
+                              clearable
+                              placeholder="请输入您的留言"
+                            ></el-input>
+                          </el-form-item>
+                          <el-form-item>
+                            <el-button type="primary" native-type="submit">提交</el-button>
+                          </el-form-item>
+                         
+                        </el-form>
+                   </div>
+              </div>
+            </div>
+            <!-- 子评论 -->
+           
+            <!-- 子评论 -->
+          </div>
+          <!-- 评论结束 -->
         </div>
       </div>
       <div class="right">
@@ -106,13 +150,44 @@ export default {
         id:""
       },
      liked:'',
-     like:''
+     like:'',
+    //  评论
+    comments:[],//评论列表
+    replayComments:{
+       _id: "",
+        replay: {
+          name: "",
+          replayTime: "",
+          content: "",
+          isShow: false,
+          parentName: ""
+        }
+    }
+
     };
   },
   computed: {
     
   },
   methods: {
+      //切换
+    toggle(info) {
+      info.isShow = true;
+    },
+    toggle1(info) {
+      info.isShow = false;
+    },
+    //获取留言列表
+    getComment() {
+      this.$http.get("/Comments").then(res => {
+        if (res.status == 200) {
+          // console.log(res)
+          this.comments = res.data.reverse();
+           console.log("this.comments");
+          console.log(this.comments);
+        }
+      });
+    },
     //点赞
     commentCount(){
       this.liked = this.detail.id;
@@ -135,17 +210,14 @@ export default {
                   });
         }
     },
-    //修改文章
-    saveArticle() {
     
-    },
     //返回上一页
     goback(){
        this.$router.go(-1);
     },
     // 获取图片地址
     getImgUrl(icon){
-      return require("@/assets/show/"+icon)
+      return require("@/assets/show/" + icon);
     },
     //获取文章内容
     getDetails(){
@@ -169,7 +241,7 @@ export default {
   mounted() {
     this.detail.id = this.$route.query.article_id;
     this.getDetails();
-
+    this. getComment();
   }
 };
 </script>
@@ -185,10 +257,10 @@ export default {
   display: flex;
 }
 .articlepic{
-width: 57vw;
-height: 400px;
-margin: 20px auto;
-border: 2px solid gray;
+  width: 57vw;
+  height: 400px;
+  margin: 20px auto;
+  border: 2px solid gray;
 }
 .article_content{
   line-height: 30px;
@@ -206,9 +278,6 @@ border: 2px solid gray;
 }
 .tags{
   padding: 30px 0 0 0;
-  .label{
-    
-  }
 }
 .comment{
   .comment_title{
@@ -263,13 +332,82 @@ border: 2px solid gray;
   margin-top: 25px;
   background-color: #e9eaed;
 }
+// 评论
+.record {
+  border-bottom: 1px solid rgb(206, 200, 200);
+  line-height: 50px;
+  span {
+    display: inline-block;
+    border-bottom: 2px solid green;
+    width: 100px;
+  }
+  span:hover {
+    width: 115px;
+  }
+}
+.showLeave {
+  // background-color: red;
+  padding: 15px 15px;
+  border-bottom: 1px solid rgb(206, 200, 200);
+}
+.r_showLeave {
+  padding-left: 80px;
+  padding-top: 20px;
+  border-bottom: 1px solid rgb(206, 200, 200);
+}
+.l_head {
+  // border: 1px solid green;
+  .head {
+    vertical-align: bottom;
+  }
+  .l_name {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 800;
+    padding-left: 15px;
+  }
+}
+.l_time {
+  color: #aaa;
+}
+.l_content {
+  line-height: 35px;
+  color: #424242;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.l_replay {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  color: green;
+  line-height: 35px;
+  margin-top: 15px;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+.l_replay:hover {
+  background-color: rgb(187, 243, 187);
+  color: black;
+  text-decoration: underline;
+}
+.r_info {
+  border: 1px solid rgb(187, 243, 187);
+  background-color: rgb(187, 243, 187);
+}
+.info_title {
+  font-size: 20px;
+  font-weight: 800;
+  padding-right: 15px;
+}
+// 评论
+
+
 .right {
   margin: 25px 0 0 15px;
   background-color: yellow;
-  // height: 200px;
   border-radius: 8px;
   width: 20vw;
-
   overflow: hidden;
 }
 
