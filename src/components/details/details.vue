@@ -41,15 +41,12 @@
             <h3 class="comment_title"><span>文章评论</span></h3>
             <div class="comment_form">
               <p class="speak">来说两句吧。。。。</p>
-               <el-form ref="messages" @submit.native.prevent="leaveMSG()"   :model="messages" label-width="120px">
+               <el-form ref="comment" @submit.native.prevent="Comment()"   :model="comment" label-width="120px">
                     <el-form-item label="用户名:">
-                        <el-input v-model="messages.name" class="input-width" @input="replaceSpace()" clearable placeholder="请输入姓名或昵称"></el-input>
+                        <el-input v-model="comment.name" class="input-width" @input="replaceSpace()" clearable placeholder="请输入姓名或昵称"></el-input>
                     </el-form-item>
-                     <!-- <el-form-item label="网址:">
-                        <el-input v-model="messages.Iurl" class="input-width" @input="replaceSpace()" clearable placeholder="请输入您博客地址"></el-input>
-                    </el-form-item> -->
                     <el-form-item label="评论内容">
-                        <el-input type="textarea" v-model="messages.content" @input="replaceSpace()" 
+                        <el-input type="textarea"  :autosize="{ minRows: 5, maxRows: 14}" v-model="comment.content" @input="replaceSpace()" 
                                   clearable placeholder="请输入您的留言"></el-input>
                     </el-form-item>
                     <el-form-item>
@@ -68,36 +65,74 @@
                 <el-avatar :size="50" icon="el-icon-user-solid" class="head"></el-avatar>
                 <span class="l_name">{{item.username}}&nbsp;&nbsp;说：</span>
               </div>
-               <p class="l_time">{{item.time}}</p>
-               <div class="l_content">{{item.content}}</div>
+              <p class="l_time">{{item.time}}</p>
+              <div class="l_content">{{item.content}}</div>
               <div class="replay">
-                 <span class="l_replay" @click="toggle(item)">回复</span>
-                   <div class="r_info"  v-show="item.isShow">
-                      <span class="info_title">发表留言</span>
-                       <span class="l_replay" @click="toggle1(item)">取消回复</span>
-                       <el-form ref="replayComments" @submit.native.prevent="replayLM(leaveMessage)" :model="replayComments.replay" label-width="120px" >
-                          <el-form-item label="您的姓名或昵称:">
-                            <el-input
-                              v-model="replayComments.replay.name"
-                              class="input-width"
-                              clearable
-                              placeholder="请输入姓名或昵称"
-                            ></el-input>
-                          </el-form-item>
-                          <el-form-item label="留言内容">
-                            <el-input
-                              type="textarea"
-                              v-model="replayComments.replay.content"
-                              clearable
-                              placeholder="请输入您的留言"
-                            ></el-input>
-                          </el-form-item>
-                          <el-form-item>
-                            <el-button type="primary" native-type="submit">提交</el-button>
-                          </el-form-item>
-                         
-                        </el-form>
-                   </div>
+                <span class="l_replay" @click="toggle(item)">回复</span>
+                <div class="r_info"  v-show="item.isShow">
+                  <span class="info_title">发表留言</span>
+                    <span class="l_replay" @click="toggle1(item)">取消回复</span>
+                    <el-form ref="replayComments" @submit.native.prevent="replayPL(item)" :model="replayComments.replay" label-width="120px" >
+                      <el-form-item label="您的姓名或昵称:">
+                        <el-input
+                          v-model="replayComments.replay.name"
+                          class="input-width"
+                          clearable
+                          placeholder="请输入姓名或昵称"
+                        ></el-input>
+                      </el-form-item>
+                      <el-form-item label="留言内容">
+                        <el-input
+                          type="textarea"
+                          :autosize="{ minRows: 5, maxRows: 14}"
+                          v-model="replayComments.replay.content"
+                          clearable
+                          placeholder="请输入您的留言"
+                        ></el-input>
+                      </el-form-item>
+                      <el-form-item>
+                        <el-button type="primary" native-type="submit">提交</el-button>
+                      </el-form-item>
+                      
+                    </el-form>
+                </div>
+              </div>
+              <div class="showReplay"  v-for="(replay,index) in item.replay" :key="index">
+                  <div class="l_head" >
+                    <el-avatar :size="50" icon="el-icon-user-solid" class="head"></el-avatar>
+                    <span class="l_name">{{ replay.name }}说11：</span>
+                  </div>
+                  <p class="l_time">{{replay.replayTime}}</p>
+                  <div class="l_content">{{replay.content}}</div>
+                  <div class="replay">
+                    <span class="l_replay" @click="toggle(replay)">回复</span>
+                     <div class="r_info"  v-show="replay.isShow">
+                        <span class="info_title">发表留言</span>
+                          <span class="l_replay" @click="toggle1(replay)">取消回复</span>
+                          <el-form ref="replayComments" @submit.native.prevent="replayPL(item)" :model="replayComments.replay" label-width="120px" >
+                            <el-form-item label="您的姓名或昵称:">
+                              <el-input
+                                v-model="replayComments.replay.name"
+                                class="input-width"
+                                clearable
+                                placeholder="请输入姓名或昵称"
+                              ></el-input>
+                            </el-form-item>
+                            <el-form-item label="评论内容">
+                              <el-input
+                                type="textarea"
+                                :autosize="{ minRows: 5, maxRows: 14}"
+                                v-model="replayComments.replay.content"
+                                clearable
+                                placeholder="请输入您的评论"
+                              ></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                              <el-button type="primary" native-type="submit">提交</el-button>
+                            </el-form-item>
+                          </el-form>
+                      </div>
+                  </div>
               </div>
             </div>
             <!-- 子评论 -->
@@ -139,12 +174,6 @@ export default {
   name: "articleList",
   data() {
     return {
-       messages:{
-        createTime:'',
-        content:'',
-        name:'',
-        Iurl:''
-      },
       article: {},
       detail:{
         id:""
@@ -152,8 +181,16 @@ export default {
      liked:'',
      like:'',
     //  评论
+    comment:{
+            name:'',
+            article_id:'',
+            time:'',
+            content:'',
+            isShow:false,
+            replay:[]
+    },
     comments:[],//评论列表
-    replayComments:{
+    replayComments:{//回复评论
        _id: "",
         replay: {
           name: "",
@@ -177,7 +214,81 @@ export default {
     toggle1(info) {
       info.isShow = false;
     },
-    //获取留言列表
+    //回复评论
+    replayPL(item){
+      this.replayComments._id = item._id;
+      var aData = new Date();
+      this.replayComments.replay.replayTime = aData.getFullYear() +  "年" + (aData.getMonth() + 1) + "月" + aData.getDate() + "日 " + aData.getHours() + ":" +  aData.getMinutes() + ":" +  aData.getSeconds();
+      console.log("this.replayComments");
+       console.log(this.replayComments);
+       if(this.replayComments.replay.name){
+         if(this.replayComments.replay.content){
+             this.$http.put("/replayComment", this.replayComments).then(res => {
+               if(res.status == 200){
+                 this.getComment();
+                 item.isShow = false;
+                 this.replayComments.replay.name = '';
+                 this.replayComments.replay.content = '';
+
+                 this.$message({
+                    message: "评论发表成功",
+                    type: "success"
+                  });
+               }
+             })
+         }else{
+           this.$message({
+            message: "请输入评论内容",
+            type: "error"
+          });
+         }
+       }else{
+          this.$message({
+            message: "请输入用户名",
+            type: "error"
+          });
+       }
+
+    },
+    //正则替换空格
+    replaceSpace() {
+        this.comment.name = this.comment.name.replace(/\s+/g, "");
+        this.comment.content = this.comment.content.replace(/\s+/g, "");
+    },
+    //发表评论
+    Comment(){
+      console.log("sssssssssssssssssss==============")
+      this.comment.article_id = this.detail.id;
+      var aData = new Date();
+      this.comment.time = aData.getFullYear() +  "年" + (aData.getMonth() + 1) + "月" + aData.getDate() + "日 " + aData.getHours() + ":" +  aData.getMinutes() + ":" +  aData.getSeconds();
+      console.log(this.comment)
+      if(this.comment.name){
+         if(this.comment.content){
+             this.$http.post("/Comment", this.comment).then(res => {
+               if(res.status == 200){
+                 this.getComment();
+                 this.comment = {};
+                 this.$message({
+                    message: "评论发表成功",
+                    type: "success"
+                  });
+               }
+             })
+         }else{
+           this.$message({
+            message: "请输入评论内容",
+            type: "error"
+          });
+         }
+       }else{
+          this.$message({
+            message: "请输入用户名",
+            type: "error"
+          });
+       }
+
+    },
+    //获取评论列表
     getComment() {
       this.$http.get("/Comments").then(res => {
         if (res.status == 200) {
@@ -369,6 +480,7 @@ export default {
 }
 .l_time {
   color: #aaa;
+  line-height: 40px;
 }
 .l_content {
   line-height: 35px;
@@ -381,7 +493,7 @@ export default {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 20px;
   color: green;
-  line-height: 35px;
+  line-height: 40px;
   margin-top: 15px;
   padding: 3px 5px;
   border-radius: 4px;
@@ -392,6 +504,8 @@ export default {
   text-decoration: underline;
 }
 .r_info {
+  padding: 20px 60px 0px 10px;
+    border-radius: 8px;
   border: 1px solid rgb(187, 243, 187);
   background-color: rgb(187, 243, 187);
 }
@@ -399,6 +513,11 @@ export default {
   font-size: 20px;
   font-weight: 800;
   padding-right: 15px;
+}
+.showReplay{
+  margin-left: 80px;
+  margin-top: 20px;
+ border-bottom: 1px solid rgb(206, 200, 200);
 }
 // 评论
 

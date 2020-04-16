@@ -19,7 +19,7 @@
             <el-input v-model="messages.Iurl" class="input-width" clearable placeholder="请输入您博客地址"></el-input>
           </el-form-item>
           <el-form-item label="留言内容">
-            <el-input type="textarea" v-model="messages.content" clearable placeholder="请输入您的留言"></el-input>
+            <el-input type="textarea"   :autosize="{ minRows: 5, maxRows: 14}" v-model="messages.content" clearable placeholder="请输入您的留言"  ></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" native-type="submit">提交</el-button>
@@ -63,6 +63,7 @@
                 <el-form-item label="留言内容">
                   <el-input
                     type="textarea"
+                    :autosize="{ minRows: 5, maxRows: 14}"
                     v-model="replayMessage.replay.content"
                     clearable
                     placeholder="请输入您的留言"
@@ -115,6 +116,7 @@
                   <el-form-item label="留言内容">
                     <el-input
                       type="textarea"
+                      :autosize="{ minRows: 5, maxRows: 14}"
                       v-model="replayMessage.replay.content"
                       clearable
                       placeholder="请输入您的留言"
@@ -320,6 +322,9 @@ p {
 .input-width {
   width: 500px;
 }
+// .textarea{
+//   height: 130px;
+// }
 
 .record {
   border-bottom: 1px solid rgb(206, 200, 200);
@@ -379,6 +384,8 @@ p {
   text-decoration: underline;
 }
 .r_info {
+  padding: 20px 60px 0px 10px;
+  border-radius: 8px;
   border: 1px solid rgb(187, 243, 187);
   background-color: rgb(187, 243, 187);
 }
