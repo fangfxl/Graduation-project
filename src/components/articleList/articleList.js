@@ -6,6 +6,7 @@ export default {
       articles: [], //文章列表
       pageSize: 15,
       currentPage: 1,
+      rank:[],
     }
   },
   computed: {
@@ -22,7 +23,19 @@ export default {
     }
   },
   methods: {
-    
+    //点击排行
+    Rank(){
+      this.rank.sort(this.compare("views"))
+      console.log("bbb",this.articles)
+      console.log("ccc",this.rank)
+    },
+    compare(index){
+      return function (a, b) {
+        var value1 = a[index];
+        var value2 = b[index];
+        return value2 - value1;
+      }
+    },
     //阅读全文
     goToDetails(id) {
       console.log(id)
@@ -32,7 +45,9 @@ export default {
     getArticles() {
       this.$http.get('articles').then(res => {
         this.articles = res.data.reverse();
+        this.rank = res.data.concat();
         console.log(this.articles)
+        this.Rank();
       })
     },
     // 获取图片地址

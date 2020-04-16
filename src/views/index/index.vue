@@ -8,9 +8,9 @@
             <p class="verse">给生活一个新起点</p>
             <p class="verse">慢下来，发现身边的美好点滴</p>
           </ul>
-          <div class="sign">
+          <!-- <div class="sign">
             <a href="#" target="_blank"><span>MAOLAI博客</span></a>
-          </div>
+          </div> -->
         </section>
     </div>
     <div class="carefully">
@@ -64,7 +64,7 @@
                   <a class="article-title" href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
                 </h3>
                 <figure>
-                  <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享">
+                  <img :src="getImgUrl(article.image || 'show1.jpg')" alt="本站个人博客模板下载分享">
                 </figure>
                 <ul>
                   <p class="article-content" v-html="article.content">{{ article.content}} </p>
@@ -85,13 +85,17 @@
             <p>现居：广东省-广州市</p>
             <p>Email：1360967095@qq.com</p>
           </div>
-          <el-card class="box-card">
-            <p><span class="sort">点击排行</span></p>
-            <img class="welcome" src="../../assets/show/show2.jpg" alt="欢迎来到龙哥博客">
-            <div class="text item" v-for="o in 4" :key="o">
-                {{'别表内容'+ o}}
-            </div>
-          </el-card>
+                  <el-card class="box-card">
+                    <p class="r_head"><span class="sort">点击排行</span></p>
+                    <div class="text item" v-for="(item ,index) in this.rank" :key="index">
+                      <div v-if="index == 0" class="box" @click="goToDetails(item._id)"> 
+                        <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
+                      </div>
+                      <p class="rank" @click="goToDetails(item._id)">
+                        {{index+1+"、"}} {{ item.title}}
+                      </p>
+                    </div>
+                </el-card>
         </aside>
       </section>
     </div>
@@ -122,6 +126,7 @@ export default {
     return {
       articles:[],//文章列表
      dialogVisible: false,
+     rank:[],
      path:"./p.html"
     };
   },
@@ -135,6 +140,20 @@ export default {
           })
           .catch(_ => {});
       },
+  //点击排行
+    Rank(){
+      this.rank.sort(this.compare("views"))
+      console.log("bbb",this.articles)
+      console.log("ccc",this.rank)
+    },
+    compare(index){
+      return function (a, b) {
+        var value1 = a[index];
+        var value2 = b[index];
+        return value2 - value1;
+      }
+    },
+
      //阅读全文
     goToDetails(id) {
       this.$router.push({path:'/details', query:{article_id : id}});
@@ -143,7 +162,8 @@ export default {
     getArticles(){
       this.$http.get('articles').then(res => {
         this.articles = res.data;
-         console.log(this.articles)
+        this.rank = res.data.concat();
+        this.Rank();
       })
     },
     // 获取图片地址
@@ -446,35 +466,49 @@ export default {
         color: #d0d2d4;
       }
     }
-    .box-card{
-      p{
-        margin-top:10px;
-        border-bottom: 1px solid #eee;
-        .sort{
-          display: inline-block;
-          font-size: 18px;
-          font-weight: 800;
-          border-bottom:2px solid black;
-          padding-bottom: 10px;
-          // transition: all .5s ease;
-        }
-        .sort:hover{
-          width: 90px;
-          transition: all 2s ease;
-        }
-      }
-      .welcome{
-        margin-top: 20px;
-        height: 120px;
-        width: 220px;
-      }
-      .text {
-        font-size: 14px;
-      }
-      .item {
-        padding: 10px 0;
-      }
+.box-card{
+  .r_head{
+    // margin-top:10px;
+    border-bottom: 1px solid #eee;
+    .sort{
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 800;
+      border-bottom:2px solid black;
+      padding-bottom: 10px;
+      // transition: all .5s ease;
     }
+    .sort:hover{
+      width: 90px;
+      transition: all 2s ease;
+    }
+  }
+}
+.box{
+  margin: 20px 0;
+  height: 150px;
+  width: 250px;
+  overflow: hidden;
+}
+.welcome{
+  height: 150px;
+  width: 250px;
+  transition:all 1s;
+}
+.welcome:hover{
+  transform:scale(1.1);
+}
+.text {
+  font-size: 20px;
+ 
+  cursor: pointer;
+}
+.rank{
+  padding: 5px 0;
+}
+.rank:hover{
+  background-color: yellowgreen;
+}
   }
 }
 footer{

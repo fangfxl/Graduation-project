@@ -44,7 +44,10 @@ export default {
        * */
       Search(){
         if(this.input2){
-          this.$router.push({path:'/searchpage', query:{ search :this.input2} });
+           console.log("sssssuouou")
+           eventBus.$emit('search', 'this.input2')
+         console.log("sssssuouou")
+          this.$router.push('/searchpage');
         }else{
           this.$router.push('/blogs');
         }

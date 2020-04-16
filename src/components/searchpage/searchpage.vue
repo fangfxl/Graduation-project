@@ -17,7 +17,7 @@
                 <a class="article-title" href="#" >{{ article.title }}</a>
               </h3>
               <figure>
-                <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享" />
+                <img :src="getImgUrl(article.image || 'show3.jpg')" alt="本站个人博客模板下载分享" />
               </figure>
               <ul>
                 <p class="article-content" v-html="article.content">{{ article.content}}</p>
@@ -72,6 +72,7 @@
 </div>
 </template>
 <script>
+import { eventBus } from '../../main'
 export default{
     name:"articleList",
     data() {
@@ -105,7 +106,7 @@ export default{
           this.articles = res.data;
           this.articlesAll = res.data;
           if(this.search){
-            let i = this.search
+          let i = this.search
           this.articles = this.articlesAll.filter(item => item.title.includes(i));
           this.search = ''
         }else{
@@ -129,11 +130,14 @@ export default{
     },
     }, 
     created() {
-      this.search = this.$route.query.search;
+      eventBus.$on('search' ,(message) => {
+        this.search = message
+        // console.log(this.personal);
+      })
+      // this.search = this.$route.query.search;
        console.log(this.search,"=========")
     },
     mounted() {
-       
       this.getArticles();
     }
 }

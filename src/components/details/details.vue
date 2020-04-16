@@ -143,12 +143,16 @@
         </div>
       </div>
       <div class="right">
-        <el-card class="box-card">
-          <p>
-            <span class="sort">点击排行</span>
-          </p>
-          <img class="welcome" src="../../assets/show/show2.jpg" alt="欢迎来到龙哥博客" />
-          <div class="text item" v-for="o in 4" :key="o">{{'别表内容'+ o}}</div>
+          <el-card class="box-card">
+            <p class="r_head"><span class="sort">点击排行</span></p>
+            <div class="text item" v-for="(item ,index) in this.rank" :key="index">
+              <div v-if="index == 0" class="box" @click="goToDetails(item._id)"> 
+                 <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
+              </div>
+              <p class="rank" @click="goToDetails(item._id)">
+                {{index+1+"、"}} {{ item.title}}
+              </p>
+            </div>
         </el-card>
       </div>
     </div>
@@ -199,7 +203,9 @@ export default {
           isShow: false,
           parentName: ""
         }
-    }
+    },
+    rank:[],//点击列表
+    articles:[],//文章列表
 
     };
   },
@@ -338,6 +344,36 @@ export default {
            }
         })
       },
+    //获取文章列表
+    getArticles() {
+      this.$http.get('articles').then(res => {
+        this.articles = res.data.reverse();
+        this.rank = res.data.concat();
+        console.log(this.articles)
+        this.Rank();
+      })
+    },
+      //点击排行
+    Rank(){
+      this.rank.sort(this.compare("views"))
+      console.log("bbb",this.articles)
+      console.log("ccc",this.rank)
+    },
+    compare(index){
+      return function (a, b) {
+        var value1 = a[index];
+        var value2 = b[index];
+        return value2 - value1;
+      }
+    },
+     //阅读全文
+    goToDetails(id) {
+      console.log("aa",id)
+      this.detail.id = id;
+      this.getDetails();
+      // console.log(id)
+      // this.$router.push({path:'/details', query:{article_id : id}});
+    },
     //围观数
     Views(){
       this.article.views++
@@ -353,6 +389,7 @@ export default {
     this.detail.id = this.$route.query.article_id;
     this.getDetails();
     this. getComment();
+    this. getArticles();
   }
 };
 </script>
@@ -548,16 +585,41 @@ export default {
     }
   }
 }
-.welcome {
-  margin-top: 20px;
-  height: 120px;
-  width: 220px;
+// .welcome {
+//   margin-top: 20px;
+//   height: 120px;
+//   width: 220px;
+// }
+// .text {
+//   font-size: 14px;
+// }
+// .item {
+//   padding: 10px 0;
+// }
+.box{
+  margin: 20px 0;
+  height: 150px;
+  width: 250px;
+  overflow: hidden;
+}
+.welcome{
+  height: 150px;
+  width: 250px;
+  transition:all 1s;
+}
+.welcome:hover{
+  transform:scale(1.1);
 }
 .text {
-  font-size: 14px;
+  font-size: 20px;
+ 
+  cursor: pointer;
 }
-.item {
-  padding: 10px 0;
+.rank{
+  padding: 5px 0;
+}
+.rank:hover{
+  background-color: yellowgreen;
 }
 
 footer {

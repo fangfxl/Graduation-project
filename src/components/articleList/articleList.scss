@@ -80,10 +80,11 @@ ul{
       margin: 20px 0 0 0;
       text-decoration: none;
     }
+   
     .article-content{
        display: inline-block;
-       width: 600px;
-       height: 55px;
+       width: 720px;
+       height: 57px;
        overflow: hidden;//隐藏超出
       display:-webkit-box;
       -webkit-box-orient: vertical;
@@ -140,7 +141,7 @@ ul{
 }
 .right{
   margin: 25px 0 0 15px;
-  background-color: yellow;
+  // background-color: yellow;
   // height: 200px;
   border-radius: 8px;
   width: 20vw;
@@ -149,8 +150,9 @@ ul{
 }
 
 .box-card{
-  p{
-    margin-top:10px;
+  margin-bottom: 30px;
+  .r_head{
+    // margin-top:10px;
     border-bottom: 1px solid #eee;
     .sort{
       display: inline-block;
@@ -166,16 +168,30 @@ ul{
     }
   }
 }
+.box{
+  margin: 20px 0;
+  height: 150px;
+  width: 250px;
+  overflow: hidden;
+}
 .welcome{
-  margin-top: 20px;
-  height: 120px;
-  width: 220px;
+  height: 150px;
+  width: 250px;
+  transition:all 1s;
+}
+.welcome:hover{
+  transform:scale(1.1);
 }
 .text {
-  font-size: 14px;
+  font-size: 20px;
+ 
+  cursor: pointer;
 }
-.item {
-  padding: 10px 0;
+.rank{
+  padding: 5px 0;
+}
+.rank:hover{
+  background-color: yellowgreen;
 }
 
 footer{
@@ -241,3 +257,19 @@ footer{
 }
 }
 
+@media screen and (min-width: 1920px){
+ ul .article-content{
+    width: 49vw;
+    font-size: 18px;
+    height: 60px;
+    overflow: hidden;
+  }
+  .welcome{
+    width: 380px;
+    height: 250px;
+  }
+  .item{
+    line-height: 30px;
+    font-size: 20px;
+  }
+}

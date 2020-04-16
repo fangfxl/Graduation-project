@@ -18,7 +18,7 @@
                 <a class="article-title"  href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
               </h3>
               <figure>
-                <img :src="getImgUrl(article.image)" alt="本站个人博客模板下载分享" />
+                <img :src="getImgUrl(article.image || 'show1.jpg')" alt="本站个人博客模板下载分享" />
               </figure>
               <ul>
                 <p class="article-content" v-html="article.content">{{ article.content}}</p>
@@ -48,11 +48,26 @@
     </div>
     <div class="right">
        <el-card class="box-card">
-            <p><span class="sort">点击排行</span></p>
-            <img class="welcome" src="../../assets/show/show2.jpg" alt="欢迎来到龙哥博客">
-            <div class="text item" v-for="o in 14" :key="o">
-                {{'别表内容'+ o}}
+            <p class="r_head"><span class="sort">点击排行</span></p>
+            <div class="text item" v-for="(item ,index) in this.rank" :key="index">
+              <div v-if="index == 0" class="box" @click="goToDetails(item._id)"> 
+                 <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
+              </div>
+              <p class="rank" @click="goToDetails(item._id)">
+                {{index+1+"、"}} {{ item.title}}
+              </p>
             </div>
+          </el-card>
+            <el-card class="box-card">
+                <p class="r_head"><span class="sort">点击排行</span></p>
+                <div class="text item" v-for="(item ,index) in this.rank" :key="index">
+                  <div v-if="index == 0" class="box" @click="goToDetails(item._id)"> 
+                    <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
+                  </div>
+                  <p class="rank" @click="goToDetails(item._id)">
+                    {{index+1+"、"}} {{ item.title}}
+                  </p>
+                </div>
           </el-card>
     </div>
    
