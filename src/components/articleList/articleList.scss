@@ -276,10 +276,30 @@ footer{
     height: 60px;
     overflow: hidden;
   }
-  .welcome{
-    width: 380px;
-    height: 250px;
+  .box{
+    margin: 20px 0;
+    height: 238px;
+    width: 382px;
+    // height: 150px;
+    // width: 250px;
+    overflow: hidden;
   }
+  .welcome{
+    // height: 150px;
+    // width: 250px;
+    height: 238px;
+    width: 382px;
+    transition:all 1s;
+  }
+  .welcome:hover{
+    transform:scale(1.1);
+  }
+  // .welcome{
+  //   // width: 380px;
+  //   // height: 250px;
+  //   height: 238px;
+  //   width: 382px;
+  // }
   .item{
     line-height: 30px;
     font-size: 20px;

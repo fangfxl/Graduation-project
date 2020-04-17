@@ -58,8 +58,11 @@
           <!-- 评论列表 -->
           <div class="pilun">
             <h2 class="record">
-              <span>留言记录</span>
+              <span>评论记录</span>
             </h2>
+            <div class="noComment" v-if="comments.length < 1">
+             <p>暂无评论，来说两句吧！！！</p>
+            </div>
             <div class="showLeave" v-for="(item,index) in comments" :key="index">
               <div class="l_head" >
                 <el-avatar :size="50" icon="el-icon-user-solid" class="head"></el-avatar>
@@ -135,9 +138,6 @@
                   </div>
               </div>
             </div>
-            <!-- 子评论 -->
-           
-            <!-- 子评论 -->
           </div>
           <!-- 评论结束 -->
         </div>
@@ -150,7 +150,7 @@
                  <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
               </div>
               <p class="rank" @click="goToDetails(item._id)">
-                {{index+1+"、"}} {{ item.title}}
+                {{index+1+"."}} {{ item.title}}
               </p>
             </div>
         </el-card>
@@ -235,7 +235,6 @@ export default {
                  item.isShow = false;
                  this.replayComments.replay.name = '';
                  this.replayComments.replay.content = '';
-
                  this.$message({
                     message: "评论发表成功",
                     type: "success"
@@ -300,6 +299,8 @@ export default {
         if (res.status == 200) {
           this.comments = res.data.reverse();
           this.comments = this.comments.filter(item => item.article_id == this.detail.id);
+        console.log(this.comments.length)
+        
         }
       });
     },
@@ -408,6 +409,8 @@ export default {
 }
 .article_content{
   line-height: 30px;
+  font-size: 18px;
+  text-indent: 2rem;
 }
 .comment_count{
   margin: 40px 0;
@@ -538,7 +541,7 @@ export default {
 }
 .r_info {
   padding: 20px 60px 0px 10px;
-    border-radius: 8px;
+  border-radius: 8px;
   border: 1px solid rgb(187, 243, 187);
   background-color: rgb(187, 243, 187);
 }
@@ -550,14 +553,13 @@ export default {
 .showReplay{
   margin-left: 80px;
   margin-top: 20px;
- border-bottom: 1px solid rgb(206, 200, 200);
+  border-bottom: 1px solid rgb(206, 200, 200);
 }
 // 评论
 
 
 .right {
   margin: 25px 0 0 15px;
-  background-color: yellow;
   border-radius: 8px;
   width: 20vw;
   overflow: hidden;
@@ -573,7 +575,6 @@ export default {
       font-weight: 800;
       border-bottom: 2px solid black;
       padding-bottom: 10px;
-      // transition: all .5s ease;
     }
     .sort:hover {
       width: 90px;
@@ -581,17 +582,6 @@ export default {
     }
   }
 }
-// .welcome {
-//   margin-top: 20px;
-//   height: 120px;
-//   width: 220px;
-// }
-// .text {
-//   font-size: 14px;
-// }
-// .item {
-//   padding: 10px 0;
-// }
 .box{
   margin: 20px 0;
   height: 150px;
@@ -616,6 +606,12 @@ export default {
 }
 .rank:hover{
   background-color: yellowgreen;
+}
+
+.noComment{
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
 }
 
 footer {
@@ -676,6 +672,27 @@ footer {
       left: 47px;
       background-position: -86px -36px;
     }
+  }
+}
+@media screen and (min-width: 1920px){
+
+  .box{
+    margin: 20px 0;
+    height: 238px;
+    width: 382px;
+    overflow: hidden;
+  }
+  .welcome{
+    height: 238px;
+    width: 382px;
+    transition:all 1s;
+  }
+  .welcome:hover{
+    transform:scale(1.1);
+  }
+  .item{
+    line-height: 30px;
+    font-size: 20px;
   }
 }
 </style>

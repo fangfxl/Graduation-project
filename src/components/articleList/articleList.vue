@@ -63,7 +63,7 @@
                  <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
               </div>
               <p class="rank" @click="goToDetails(item._id)">
-                {{index+1+"、"}} {{ item.title}}
+                {{index+1+"."}} {{ item.title}}
               </p>
             </div>
           </el-card>
@@ -74,7 +74,7 @@
                     <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
                   </div>
                   <p class="rank" @click="goToDetails(item._id)">
-                    {{index+1+"、"}} {{ item.title}}
+                    {{index+1+"."}} {{ item.title}}
                   </p>
                 </div>
           </el-card>

@@ -16,22 +16,9 @@
     <div class="carefully">
       <section class="box1">
         <h3>
-          <p>热门推荐</p>
+          <p>照片墙</p>
         </h3>
         <ul>
-          <li>
-            <a href="#" title="沐浴在阳光下" target="_blank">
-            <img src="../../assets/show/show1.jpg" alt="沐浴在阳光下">
-            </a>
-            <span>沐浴在阳光下</span>
-          </li>
-          <li>
-            <a href="#" title="沐浴在阳光下" target="_blank">
-            <img src="../../assets/show/show1.jpg" alt="沐浴在阳光下">
-            </a>
-            <span>沐浴在阳光下</span>
-          </li>
-          
           <li>
             <a href="#" title="沐浴在阳光下" target="_blank">
             <img src="../../assets/show/show4.jpg" alt="沐浴在阳光下">
@@ -56,6 +43,19 @@
             </a>
             <span>沐浴在阳光下</span>
           </li>
+          <li>
+            <a href="#" title="沐浴在阳光下" target="_blank">
+            <img src="../../assets/show/show4.jpg" alt="沐浴在阳光下">
+            </a>
+            <span>沐浴在阳光下</span>
+          </li>
+          <li>
+            <a href="#" title="沐浴在阳光下" target="_blank">
+            <img src="../../assets/show/show4.jpg" alt="沐浴在阳光下">
+            </a>
+            <span>沐浴在阳光下</span>
+          </li>
+       
         </ul>
       </section>
     </div>
@@ -63,7 +63,9 @@
       
       <section class="box2">
         <!-- <h2><p>文章<span>推荐</span></p></h2> -->
-        
+        <h3>
+          <p>博文推荐</p>
+        </h3>
         <div class="left">
           <h2> <span class="title">最新博文</span> </h2>
           <div class="list " v-for="(article , index ) in dataShow" :key="index">
@@ -102,6 +104,8 @@
             <p>职业：web前端开发工程师</p>
             <p>现居：广东省-广州市</p>
             <p>Email：1360967095@qq.com</p>
+            <p>喜好：逛公园、游戏、美食</p>
+            <p>运动：羽毛球、乒乓球、篮球</p>
           </div>
                   <el-card class="box-card">
                     <p class="r_head"><span class="sort">点击排行</span></p>
@@ -110,7 +114,7 @@
                         <img class="welcome" :src="getImgUrl(item.image || 'show1.jpg')" alt="欢迎来到龙哥博客">
                       </div>
                       <p class="rank" @click="goToDetails(item._id)">
-                        {{index+1+"、"}} {{ item.title}}
+                        {{index+1+"."}} {{ item.title}}
                       </p>
                     </div>
                 </el-card>
@@ -302,6 +306,7 @@ export default {
   width: 100%;
   .box1{
     width: 1300px;
+    height: 650px;
     margin: auto;
     overflow: hidden;
   }
@@ -327,6 +332,8 @@ export default {
   }
   ul{
     display: flex;
+    flex-wrap: wrap ;
+    justify-content:space-around;
     li{
       margin: 3px;
       // float: left;
@@ -340,8 +347,10 @@ export default {
         text-decoration: none;
         color: #333;
         img{
-          width: 176px;
-          height: 110px;
+          width: 400px;
+          height: 250px;
+          // width: 176px;
+          // height: 110px;
           background: #FFF;
           padding: 4px;
           box-shadow: 0px 0px 2px rgba(0,0,0,.5);
@@ -353,7 +362,7 @@ export default {
         display: block;
         text-align: center;
         margin-top: 5px;
-        width: 177px;
+        // width: 177px;
         overflow: hidden;
         text-overflow: ellipsis;
         height: 16px;
@@ -367,10 +376,30 @@ export default {
 .articles{
   // position: absolute;
   .box2{
-    width: 1200px;
+    width: 1300px;
     margin: auto;
     overflow: hidden;
     display: block;
+  }
+  h3{
+    border-bottom: #FFF 1px solid;
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    margin: 0 0 10px;
+    font-family: "微软雅黑";
+    display: block;
+    clear: both;
+    p{
+      background: #474645;
+      width: 180px;
+      height: 25px;
+      margin: 15px 0 0 10px;
+      line-height: 25px;
+      color: #fff;
+      text-align: center;
+      box-shadow: #999 4px 5px 1px;
+    }
   }
   h2{
 
@@ -397,7 +426,7 @@ export default {
     }
   }
   .left{
-    width: 840px;
+    width: 880px;
     overflow: hidden;
     margin: 20px 20px 10px 0 ;
     padding: 15px 25px;
@@ -482,7 +511,7 @@ export default {
   .right{
     margin-top: 20px;
     float: left;
-    width: 290px;
+    width: 340px;
     height: 1200px;
     .profile-card{
       height: 260px;
@@ -528,13 +557,13 @@ export default {
 }
 .box{
   margin: 20px 0;
-  height: 150px;
-  width: 250px;
+  height: 184px;
+  width: 298px;
   overflow: hidden;
 }
 .welcome{
-  height: 150px;
-  width: 250px;
+  height: 184px;
+  width: 298px;
   transition:all 1s;
 }
 .welcome:hover{
@@ -547,9 +576,11 @@ export default {
 }
 .rank{
   padding: 5px 0;
+  border-bottom: 1px dotted rgb(224, 219, 219);
 }
 .rank:hover{
   background-color: yellowgreen;
+  
 }
   }
 }
