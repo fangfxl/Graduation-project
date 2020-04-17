@@ -6,7 +6,7 @@
         <div class="timeLine">
           <el-timeline>
             <el-timeline-item :timestamp = " article.time " placement="top"  v-for="(article ,index) in dataShow" :key="index">
-                <div  @click="goToArticle(article._id)">
+                <div  @click="goToDetails(article._id)">
                 <el-card >
                   <h4>{{article.title}}</h4>
                   <p>王小虎 提交于 2018/4/12 20:46</p>
@@ -70,10 +70,11 @@ export default {
     }
   },
  methods:{
-   //调至文章详情页
-   goToArticle(id){
-     console.log(id,"===========")
-   },
+   //阅读全文
+    goToDetails(id) {
+      console.log(id)
+      this.$router.push({path:'/details', query:{article_id : id}});
+    },
    //获取文章列表
     getArticles(){
         this.$http.get('articles').then(res => {

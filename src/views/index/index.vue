@@ -27,6 +27,13 @@
           </li>
           <li>
             <a href="#" title="沐浴在阳光下" target="_blank">
+            <img src="../../assets/show/show1.jpg" alt="沐浴在阳光下">
+            </a>
+            <span>沐浴在阳光下</span>
+          </li>
+          
+          <li>
+            <a href="#" title="沐浴在阳光下" target="_blank">
             <img src="../../assets/show/show4.jpg" alt="沐浴在阳光下">
             </a>
             <span>沐浴在阳光下</span>
@@ -59,7 +66,7 @@
         
         <div class="left">
           <h2> <span class="title">最新博文</span> </h2>
-          <div class="list " v-for="(article , index ) in articles" :key="index">
+          <div class="list " v-for="(article , index ) in dataShow" :key="index">
                 <h3>
                   <a class="article-title" href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
                 </h3>
@@ -76,6 +83,17 @@
                   <span>分类：[ <a href="#">{{ article.sort}}</a> ] </span>
                 </p>    
           </div>
+           <div class="block">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="[5, 10, 15, 20]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total=" articles.length"
+            ></el-pagination>
+        </div>
         </div>
         <aside class="right">
           <div class="profile-card">
@@ -125,13 +143,27 @@ export default {
   data() {
     return {
       articles:[],//文章列表
-     dialogVisible: false,
-     rank:[],
-     path:"./p.html"
+      dialogVisible: false,
+      rank:[],
+      path:"./p.html",
+      pageSize: 5,
+      currentPage: 1,
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    dataShow: function () {
+      let start = (this.currentPage - 1) * this.pageSize;
+      let end = Math.min(
+        this.currentPage * this.pageSize,
+        this.articles.length
+      );
+      return this.articles.slice(start, end);
+    },
+    pageNum: function () {
+      return Math.round(this.articles.length / this.pageSize) || 1;
+    }
+  },
   methods: {
      handleClose(done) {
         this.$confirm('确认关闭？')
@@ -140,6 +172,16 @@ export default {
           })
           .catch(_ => {});
       },
+        // 分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      console.log(this.pageSize);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.currentPage = val;
+    },
   //点击排行
     Rank(){
       this.rank.sort(this.compare("views"))

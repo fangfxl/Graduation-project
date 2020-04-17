@@ -12,7 +12,16 @@
         </div>
       </div>
       <div class="content">
-          <h2 class="menu"><span class="title">最新博文</span></h2>
+          <div class="head">
+            <h2 class="menu">
+              <span class="title">最新博文</span>
+            </h2>
+            <el-breadcrumb separator="/" class="breadcrumb">
+              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <!-- <el-breadcrumb-item @click="getArticles()" class="all">全部博文</el-breadcrumb-item> -->
+              <span  @click="getArticles()" class="all">全部博文</span>
+            </el-breadcrumb>
+          </div>
           <div class="list" v-for="(article , index ) in  dataShow" :key="index">
               <h3>
                 <a class="article-title"  href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
@@ -29,7 +38,7 @@
                 <span>{{article.time}}</span>
                 <span>
                   分类：[
-                  <a href="#">{{article.sort_id}}</a> ]
+                  <a href="#">{{article.sort}}</a> ]
                 </span>
               </p>
           </div>

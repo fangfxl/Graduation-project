@@ -44,12 +44,18 @@ export default {
        * */
       Search(){
         if(this.input2){
-           console.log("sssssuouou")
-           eventBus.$emit('search', 'this.input2')
-         console.log("sssssuouou")
-          this.$router.push('/searchpage');
+            let str = this.input2;
+            this.$store.state.search = str;
+            this.input2 = ''
+            if( this.$route.path != '/blogs'){
+                this.$router.push('/blogs');
+            }
         }else{
-          this.$router.push('/blogs');
+          this.$message({
+                    message: "请输入搜索内容",
+                    type: "info",
+                    closable:true
+                  });
         }
       },
      // 路由跳转

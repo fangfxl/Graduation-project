@@ -33,7 +33,7 @@
                   </el-tag> -->
             </div>
             <div class="comment_count">
-              <el-button class="commentbtn" type="success" round  @click="commentCount()">很赞哦！({{this.article.comment_count}})</el-button>
+              <el-button class="commentbtn" type="success" round  @click="commentCount()">很赞哦！({{this.article.count}})</el-button>
               <el-button class="commentbtn" type="info" round @click="goback()">返回上一页</el-button>
             </div>
           </div>
@@ -298,10 +298,8 @@ export default {
     getComment() {
       this.$http.get("/Comments").then(res => {
         if (res.status == 200) {
-          // console.log(res)
           this.comments = res.data.reverse();
-           console.log("this.comments");
-          console.log(this.comments);
+          this.comments = this.comments.filter(item => item.article_id == this.detail.id);
         }
       });
     },
@@ -311,7 +309,7 @@ export default {
       this.like = sessionStorage.getItem(this.liked);
         if(!this.like){
           sessionStorage.setItem(this.liked, 'true');
-          this.article.comment_count++
+          this.article.count++
             this.$http.put("updateArticle", this.article).then(res => {
                 if(res.status == 200){
                   this.$message({
@@ -368,11 +366,9 @@ export default {
     },
      //阅读全文
     goToDetails(id) {
-      console.log("aa",id)
       this.detail.id = id;
       this.getDetails();
-      // console.log(id)
-      // this.$router.push({path:'/details', query:{article_id : id}});
+      this.getComment();
     },
     //围观数
     Views(){

@@ -81,7 +81,7 @@ export default{
             articles:[],//文章列表
             pageSize: 15,
             currentPage: 1,
-            search:'',
+            // search:'',
             articlesAll:[],
 
         }
@@ -97,46 +97,59 @@ export default{
       },
       pageNum: function() {
         return Math.round(this.articles.length / this.pageSize) || 1;
+      },
+      search (){
+        return this.$store.search;
+      }
+    },
+    watch:{
+      '$store.state.search' (newVal , oldVal){
+        console.log(newVal,oldVal,"监听");
+        if(this.$store.state.shearch == '1'){
+          
+        }else{
+              console.log("2222====")
+              this.$store.state.search = ' ';
+        }
       }
     },
     methods:{
          //获取文章列表
-    getArticles(){
-        this.$http.get('articles').then(res => {
-          this.articles = res.data;
-          this.articlesAll = res.data;
-          if(this.search){
-          let i = this.search
-          this.articles = this.articlesAll.filter(item => item.title.includes(i));
-          this.search = ''
-        }else{
-          // this.articles = this.articlesAll;
-        }
-        })
-      },
-       // 获取图片地址
-    getImgUrl(icon){
-        return require("@/assets/show/"+icon)
-      },
-       // 分页
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.pageSize = val;
-      console.log(this.pageSize);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.currentPage = val;
-    },
+          getArticles(){
+              this.$http.get('articles').then(res => {
+                this.articles = res.data;
+                this.articlesAll = res.data;
+                if(this.search){
+                let i = this.search
+                this.articles = this.articlesAll.filter(item => item.title.includes(i));
+                this.search = ''
+              }else{
+                // this.articles = this.articlesAll;
+              }
+              })
+            },
+            // 获取图片地址
+          getImgUrl(icon){
+              return require("@/assets/show/"+icon)
+            },
+            // 分页
+          handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            console.log(this.pageSize);
+          },
+          handleCurrentChange(val) {
+            console.log(`当前页: ${val}`);
+            this.currentPage = val;
+          },
     }, 
     created() {
-      eventBus.$on('search' ,(message) => {
-        this.search = message
-        // console.log(this.personal);
-      })
+      // console.log("mmmm",this.$store.search )
+      
       // this.search = this.$route.query.search;
-       console.log(this.search,"=========")
+      //  console.log(this.search,"=========")
     },
+
     mounted() {
       this.getArticles();
     }

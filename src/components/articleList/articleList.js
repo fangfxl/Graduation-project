@@ -7,6 +7,7 @@ export default {
       pageSize: 15,
       currentPage: 1,
       rank:[],
+      articlesAll:[],
     }
   },
   computed: {
@@ -20,6 +21,13 @@ export default {
     },
     pageNum: function () {
       return Math.round(this.articles.length / this.pageSize) || 1;
+    }
+  },
+  //监听搜索
+  watch:{
+    '$store.state.search' (newVal , oldVal){
+      console.log(newVal,oldVal,"监听");
+      this.articles = this.articlesAll.filter(item => item.title.includes(newVal));
     }
   },
   methods: {
@@ -46,6 +54,7 @@ export default {
       this.$http.get('articles').then(res => {
         this.articles = res.data.reverse();
         this.rank = res.data.concat();
+        this.articlesAll = res.data;
         console.log(this.articles)
         this.Rank();
       })
