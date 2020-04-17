@@ -18,9 +18,11 @@
             </h2>
             <el-breadcrumb separator="/" class="breadcrumb">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              <!-- <el-breadcrumb-item @click="getArticles()" class="all">全部博文</el-breadcrumb-item> -->
               <span  @click="getArticles()" class="all">全部博文</span>
             </el-breadcrumb>
+          </div>
+          <div class="noList"  v-if="dataShow.length < 1">
+            <p>找不到相关文章...</p>
           </div>
           <div class="list" v-for="(article , index ) in  dataShow" :key="index">
               <h3>

@@ -573,7 +573,7 @@ export default {
       display: inline-block;
       font-size: 18px;
       font-weight: 800;
-      border-bottom: 2px solid black;
+      border-bottom: 2px solid #099B43;
       padding-bottom: 10px;
     }
     .sort:hover {
@@ -609,6 +609,7 @@ export default {
 }
 
 .noComment{
+  padding-top: 30px;
   height: 60px;
   text-align: center;
   line-height: 60px;

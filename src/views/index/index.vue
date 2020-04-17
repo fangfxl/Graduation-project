@@ -67,7 +67,9 @@
           <p>博文推荐</p>
         </h3>
         <div class="left">
-          <h2> <span class="title">最新博文</span> </h2>
+          <p class="newArticle">
+             <span class="title">最新博文</span> 
+          </p>
           <div class="list " v-for="(article , index ) in dataShow" :key="index">
                 <h3>
                   <a class="article-title" href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
@@ -401,30 +403,47 @@ export default {
       box-shadow: #999 4px 5px 1px;
     }
   }
-  h2{
-
-    font: 18px "微软雅黑", Arial, Helvetica, sans-serif;
-    
+  .newArticle{
+    font-size: 22px;
+    font-weight: 800;
+    padding: 3px 0;
+    // line-height: 40px;
+    font-family: "微软雅黑", Arial, Helvetica, sans-serif;
     border-bottom: 1px solid rgb(238, 231, 231);
     .title{
-      display: inline-block;
-      color: #444;
-      font-weight: bold;
-      line-height: 40px;
+      display: block;
+      padding: 3px 0;
+      width: 90px;
+      // line-height: 40px;
+      // cursor: pointer;
       border-bottom: 2px solid #099B43;
     }
     .title:hover{
-      width: 85px;
-    }
-    // background: url(../../assets/fenge.png) repeat-x 20px center;
-    p{
-    background: #fff;
-    width: 90px;
-    span{
-      color: #FE5187;
-    }
+      width: 110px;
     }
   }
+  // h2{
+  //   font: 18px "微软雅黑", Arial, Helvetica, sans-serif;
+  //   border-bottom: 1px solid rgb(238, 231, 231);
+  //   .title{
+  //     display: inline-block;
+  //     color: #444;
+  //     font-weight: bold;
+  //     // line-height: 40px;
+  //     border-bottom: 2px solid #099B43;
+  //   }
+  //   .title:hover{
+  //     width: 85px;
+  //   }
+  //   // background: url(../../assets/fenge.png) repeat-x 20px center;
+  //   p{
+  //   background: #fff;
+  //   width: 90px;
+  //   span{
+  //     color: #FE5187;
+  //   }
+  //   }
+  // }
   .left{
     width: 880px;
     overflow: hidden;
@@ -545,7 +564,7 @@ export default {
       display: inline-block;
       font-size: 18px;
       font-weight: 800;
-      border-bottom:2px solid black;
+      border-bottom:2px solid #099B43;
       padding-bottom: 10px;
       // transition: all .5s ease;
     }

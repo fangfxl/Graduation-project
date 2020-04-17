@@ -33,7 +33,15 @@
   }
 
 }
-
+.noList{
+  // height: 80px;
+  padding-top: 30px;
+  p{
+    line-height: 80px;
+    font-size: 18px;
+    text-align: center;
+  }
+}
 .list{
   border-bottom: 1px dotted rgb(235, 228, 228);
 
@@ -153,8 +161,6 @@ ul{
 }
 .right{
   margin: 25px 0 0 15px;
-  // background-color: yellow;
-  // height: 200px;
   border-radius: 8px;
   width: 20vw;
   
@@ -170,7 +176,7 @@ ul{
       display: inline-block;
       font-size: 18px;
       font-weight: 800;
-      border-bottom:2px solid black;
+      border-bottom:2px solid #099B43;
       padding-bottom: 10px;
       // transition: all .5s ease;
     }
