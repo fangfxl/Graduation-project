@@ -5,10 +5,11 @@
       <el-table-column prop="title" label="标题" width="250" class="title"></el-table-column>
       <el-table-column prop="time" label="创建时间" width="250"></el-table-column>
       <el-table-column prop="views" label="浏览量" width="150"></el-table-column>
-      <el-table-column prop="comment_count" label="点赞量" width="150"></el-table-column>
-      <el-table-column prop="sort_id" label="分类" width="150"></el-table-column>
-      <el-table-column prop="author" label="作者" width="100"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="300">
+      <el-table-column prop="count" label="点赞量" width="150"></el-table-column>
+      <el-table-column prop="sort" label="分类" width="250"></el-table-column>
+      <el-table-column prop="label" label="标签" width="250"></el-table-column>
+      <el-table-column prop="author" label="作者" width="200"></el-table-column>
+      <el-table-column fixed="right" label="操作" >
            <template slot="header" slot-scope="scope">
               <el-input
                 v-model="search"
@@ -43,7 +44,7 @@ export default {
     return {
       articles: [],
       articlesAll:[],
-      pageSize: 5,
+      pageSize: 10,
       currentPage: 1,
       search: '', //搜索
       input2: ''

@@ -21,6 +21,7 @@
         <ul>
           <li>
             <a href="#" title="沐浴在阳光下" target="_blank">
+            <!-- <el-image src="../../assets/show/show4.jpg"></el-image> -->
             <img src="../../assets/show/show4.jpg" alt="沐浴在阳光下">
             </a>
             <span>沐浴在阳光下</span>
@@ -75,7 +76,8 @@
                   <a class="article-title" href="javascript:void(0)"  @click="goToDetails(article._id)">{{ article.title }}</a>
                 </h3>
                 <figure>
-                  <img :src="getImgUrl(article.image || 'show1.jpg')" alt="本站个人博客模板下载分享">
+                  <el-image :src="getImgUrl(article.image || 'show1.jpg')"></el-image>
+                  <!-- <img :src="getImgUrl(article.image || 'show1.jpg')" alt="本站个人博客模板下载分享"> -->
                 </figure>
                 <ul>
                   <p class="article-content" v-html="article.content">{{ article.content}} </p>
@@ -151,6 +153,7 @@ export default {
       articles:[],//文章列表
       dialogVisible: false,
       rank:[],
+      // src:'',
       path:"./p.html",
       pageSize: 5,
       currentPage: 1,

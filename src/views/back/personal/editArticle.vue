@@ -1,10 +1,27 @@
 <template>
-  <el-form @submit.native.prevent="saveArticle" ref="form" :model="article" label-width="80px">
+    <el-form @submit.native.prevent="saveArticle" ref="form" :model="article" label-width="80px">
     <el-form-item label="文章标题">
-      <el-input v-model="article.title" width="500"></el-input>
+      <div class="title">
+          <el-input v-model="article.title" placeholder="请输入文章标题" ></el-input>
+      </div>
+    </el-form-item>
+      <el-form-item label="配图名称">
+         <el-upload
+            class="upload-demo"
+            action="#"
+            :auto-upload="false"
+            :on-change="getFile"
+            :before-remove="beforeRemove"
+             multiple
+            :limit="1"
+            :on-exceed="handleExceed"
+            :file-list="fileList">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
     </el-form-item>
     <el-form-item label="文章分类">
-      <el-select v-model="article.sort_id" placeholder="请选择">
+      <el-select v-model="article.sort" placeholder="请选择">
         <el-option
           v-for="item in sorts"
           :key="item._id"
@@ -14,21 +31,30 @@
       </el-select>
     </el-form-item>
     <el-form-item label="文章内容">
-      <quill-editor v-model="article.content" ref="myQuillEditor" :options="editorOption"></quill-editor>
+      <div class="editor">
+          <quill-editor 
+                v-model="article.content" 
+                ref="myQuillEditor" 
+                :options="editorOption" 
+              >
+          </quill-editor>
+      </div>
+          
     </el-form-item>
-    <el-form-item label="标签">
-      <el-select v-model="article.label_id" placeholder="请选择">
-        <el-option
-          v-for="item in labels"
-          :key="item.value"
-          :label="item.label_name"
-          :value="item.label_name"
-        ></el-option>
+       <el-form-item label="标签">
+        <el-select v-model="article.label" multiple  placeholder="请选择">
+          <el-option
+            v-for="item in labels"
+            :key="item.value"
+            :label="item.label_name"
+            :value="item.label_name"
+          ></el-option>
       </el-select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" native-type="submit">保存</el-button>
-      <el-button @click="goSort()">取消</el-button>
+      <el-button type="primary" native-type="submit">保存修改</el-button>
+      <el-button>取消</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -45,6 +71,11 @@ export default {
       labels: "", //标签
       options: "",
       value: "",
+      //图片上传
+      fileList: [{name : ''}],
+      imageUrl:'',
+      imgRes:'',
+      imgName:'',
       editorOption: {},
       modules: {
         toolbar: [
@@ -77,7 +108,18 @@ export default {
     }
   },
   methods: {
-   
+    //图片一点击打开就触发的函数
+      getFile(file, fileList){
+        this.imgName = file.name;
+        this.imageUrl=file.url;
+        console.log(fileList)
+      },
+      handleExceed(files, fileList) {
+         this.$message.warning(`当前限制选择1张，若想替换请先将已存的图片删除`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      },
     // 获取分类
     getSort() {
       this.$http.get("sort").then(res => {
@@ -94,6 +136,8 @@ export default {
     getDetails() {
       this.$http.post("articleDetails", this.detail).then(res => {
         this.article = res.data;
+        console.log(res.data)
+        this.fileList[0].name = res.data.image;
       });
     },
     goPersonal() {
@@ -101,8 +145,10 @@ export default {
     },
     //修改文章
     saveArticle() {
+       this.article.image = this.imgName || 'show1.jpg';
       this.$http.put("updateArticle", this.article).then(res => {
       if(res.status == 200){
+
          this.$message({
           message: "保存成功",
           type: "success"
@@ -125,4 +171,43 @@ textarea {
   width: 400px;
   height: 300px;
 }
+.editor{
+  height: 310px;
+   width: 1000px
+}
+.quill-editor{
+    height: 200px !important;
+  }
+.title{
+  width: 1000px;
+}
+.image{
+  width: 200px;
+  height: 150px;
+}
+
+// 上传图片
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

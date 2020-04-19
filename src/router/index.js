@@ -17,6 +17,11 @@ import editSort from '../views/back/personal/editSort.vue'
 import labelList from '../views/back/label/labelList.vue'
 import addLabel from '../views/back/label/addLabel.vue'
 import editLabel from '../views/back/label/editLabel.vue'
+//评论管理
+import comment from '../views/back/comment/comment.vue'
+//留言管理
+// import messageList from '../views/back/message/messageList.vue'
+import messageList from '../views/back/message/messagelist.vue'
 
 //留言
 import leaveMessage from '../components/leaveMessage/leaveMessage.vue'
@@ -106,6 +111,16 @@ const routes = [
         path : 'editLabel',
         name:'editLabel',
         component: editLabel
+      },
+      {
+        path : 'messageList',
+        name:'messageList',
+        component: messageList
+      },
+      {
+        path : 'comment',
+        name:'comment',
+        component: comment
       }
     ]
   

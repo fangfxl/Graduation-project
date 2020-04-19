@@ -5,7 +5,7 @@
         <el-menu :default-openeds="['1']">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-message"></i>博文管理
+              <i class="el-icon-collection"></i>博文管理
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
@@ -16,7 +16,7 @@
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
-              <i class="el-icon-message"></i>分类管理
+              <i class="el-icon-sort"></i>分类管理
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
@@ -27,7 +27,7 @@
           </el-submenu>
            <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-message"></i>标签管理
+              <i class="el-icon-collection-tag"></i>标签管理
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
@@ -38,12 +38,12 @@
           </el-submenu>
           <el-submenu index="4">
             <template slot="title">
-              <i class="el-icon-message"></i>评论管理
+              <i class="el-icon-chat-square"></i>评论管理
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
-              <el-menu-item index="3"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
-              <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
+              <el-menu-item index="7"><router-link :to="{name: 'comment'}" tag="li" >评论列表</router-link></el-menu-item>
+              <!-- <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item> -->
             </el-menu-item-group>
             
           </el-submenu>
@@ -53,8 +53,7 @@
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
-              <el-menu-item index="3"><router-link :to="{name: 'labelList'}" tag="li" >标签列表</router-link></el-menu-item>
-              <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item>
+              <el-menu-item index="8"><router-link :to="{name: 'messageList'}" tag="li" >留言</router-link></el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>

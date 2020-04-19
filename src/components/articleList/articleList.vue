@@ -14,7 +14,7 @@
       <div class="content">
           <div class="head">
             <h2 class="menu">
-              <span class="title">最新博文</span>
+              <span class="title1">最新博文</span>
             </h2>
             <el-breadcrumb separator="/" class="breadcrumb">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
