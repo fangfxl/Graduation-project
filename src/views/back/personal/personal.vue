@@ -36,17 +36,16 @@
             </el-menu-item-group>
             
           </el-submenu>
-          <el-submenu index="4">
+          <!-- <el-submenu index="4">
             <template slot="title">
               <i class="el-icon-chat-square"></i>评论管理
             </template>
             <el-menu-item-group>
               <template slot="title"></template>
               <el-menu-item index="7"><router-link :to="{name: 'comment'}" tag="li" >评论列表</router-link></el-menu-item>
-              <!-- <el-menu-item index="4"><router-link :to="{name: 'addLabel'}" tag="li" >添加标签</router-link></el-menu-item> -->
             </el-menu-item-group>
             
-          </el-submenu>
+          </el-submenu> -->
           <el-submenu index="5">
             <template slot="title">
               <i class="el-icon-message"></i>留言管理
@@ -62,7 +61,9 @@
       <el-main>
         <router-view></router-view>
       </el-main>
+      
     </el-container>
+     <!-- <el-footer>Footer</el-footer> -->
   </el-container>
 </template>
 
@@ -88,8 +89,6 @@ export default {
 </script>
 
 <style>
-
-
 .el-aside {
   color: #333;
 }

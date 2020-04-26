@@ -18,7 +18,7 @@
                 <i @click="edit(scope.row._id)" style="display:none"></i>
            </template>
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row._id)" type="primary" size="small">查看评论</el-button>
+          <el-button @click="readComment(scope.row)" type="primary" size="small">查看评论</el-button>
           <el-button @click="edit(scope.row._id)" type="primary" size="small">编辑</el-button>
           <el-button @click="remove(scope.row._id)" size="small" type="danger">删除</el-button>
         </template>
@@ -64,6 +64,10 @@ export default {
     }
   },
   methods: {
+    readComment(item){
+      console.log(item)
+      this.$router.push({path:'/personal/comment', query:{article_item:item}});
+    },
     //搜索
     /**
        * @description 搜索

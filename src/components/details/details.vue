@@ -5,7 +5,7 @@
         <div class="content">
           <div class="head">
             <h2 class="menu">
-              <span class="title">最新博文</span>
+              <span class="title1">最新博文</span>
             </h2>
             <el-breadcrumb separator="/" class="breadcrumb">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -17,14 +17,17 @@
             <div class="info">
               <span>作者: {{this.article.author}}</span>
               <span>{{this.article.time}}</span>
-              <span>【{{this.article.sort_id}}】</span>
+              <span>【{{this.article.sort}}】</span>
               <span>{{this.article.views}}人已围观</span>
             </div>
-            <img :src="getImgUrl( this.article.image || 'show1.jpg' )"  class="articlepic">
+            <div class="imageShow">
+                 <img :src="getImgUrl( this.article.image || 'show1.jpg' )"  class="articlepic">
+            </div>
+           
             <div class="article_content" v-html="this.article.content">{{this.article.content}}</div>
             <div class="tags">
               <span>Tages: </span>
-              <span class="label">{{this.article.label_id}} </span>
+              <span class="label">{{this.article.label}} </span>
                <!-- <el-tag v-for="item in 4"
                     :key="item.label"
                     :type="item.type"
@@ -96,7 +99,6 @@
                       <el-form-item>
                         <el-button type="primary" native-type="submit">提交</el-button>
                       </el-form-item>
-                      
                     </el-form>
                 </div>
               </div>
@@ -401,8 +403,14 @@ export default {
   margin: auto;
   display: flex;
 }
+.imageShow{
+   text-align: center;
+  margin: auto;
+}
 .articlepic{
-  width: 57vw;
+  // text-align: center;
+  // margin: auto;
+  width: 800px;
   height: 400px;
   margin: 20px auto;
   border: 2px solid gray;
@@ -457,14 +465,14 @@ export default {
     float: left;
     font: 18px "微软雅黑", Arial, Helvetica, sans-serif;
     border-bottom: 1px solid rgb(238, 231, 231);
-    .title {
+    .title1 {
       display: inline-block;
       color: #444;
       font-weight: bold;
       line-height: 40px;
       border-bottom: 2px solid #099b43;
     }
-    .title:hover {
+    .title1:hover {
       width: 85px;
     }
   }

@@ -121,7 +121,7 @@
                         {{index+1+"."}} {{ item.title}}
                       </p>
                     </div>
-                </el-card>
+                 </el-card>
         </aside>
       </section>
     </div>
